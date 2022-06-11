@@ -1,0 +1,88 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h3>List of Fournisseurs</h3>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a routerLink="/admin/accueil/dashboard">Accueil</a></li>
+                        <li class="breadcrumb-item active">Fournisseurs</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-4 col-3">
+                    <!--  <h4 class="page-title">List of Fournisseurs</h4> -->
+                </div>
+
+                <div class="col-sm-4 col-3">
+                    <input type="text" class="form-control" placeholder="search" [(ngModel)]="searchText" />
+                </div>
+
+                <div class="col-sm-4 col-6 text-right m-b-20">
+
+                    <a (click)="onAddFournisseur()" class="btn btn btn-primary btn-rounded float-right">
+                        <i class="fa fa-plus"></i>Ajouter Fournisseur</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Reference</th>
+                                    <th>Produit</th>
+                                    <th>Fournisseur</th>
+                                    <th>Telephone</th>
+                                    <th>Email</th>
+                                    <th>Addresse</th>
+                                    <th>Action</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let fourDTO of fournisseurListDTO | filter:searchText | paginate: {itemsPerPage: 15, currentPage: p}; let i=index;">
+                                    <td>{{ fourDTO?.reference }}</td>
+                                    <td>{{ fourDTO?.productDto.designation }}</td>
+                                    <td>{{ fourDTO?.firstName }} {{ fourDTO?.lastName }}</td>
+                                    <td>{{ fourDTO?.telephone }}</td>
+                                    <td>{{ fourDTO?.email }}</td>
+                                    <td>{{ fourDTO?.stateDto.name }}</td>
+
+                                    <td class="text-right">
+                                        <button class="btn btn-warning btn-sm" (click)="sendMailToFournisseur(fourDTO)">
+                                            <i class="fa fa-envelope" aria-hidden="true"></i></button
+                                          >&nbsp;
+            
+                                        <button class="btn btn-primary btn-sm" [routerLink]="['/admin/accueil/fournisseurs/fournisseur', fourDTO.id]">
+                                        <em class="fa fa-edit" aria-hidden="true"></em></button
+                                      >&nbsp;
+                            
+                                      <button
+                                        class="btn btn-danger btn-sm"
+                                        (click)="onDeleteFournisseur(fourDTO.id)"
+                                      >
+                                        <i class="fa fa-trash" aria-hidden="true"></i></button
+                                      >&nbsp;
+                                    </td>
+            
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="pagination">
+                            <pagination-controls (pageChange)="p=$event"></pagination-controls>
+                        </div>
+                    </div>
+                </div>
+            </div>
+  </div>
+</section>
+</div>

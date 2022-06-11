@@ -1,0 +1,114 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <!--  <h1>Utilisateurs</h1> -->
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a routerLink="/admin/accueil/dashboard">Accueil</a></li>
+                        <li class="breadcrumb-item active">Utilisateurs</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-4 col-3">
+                    <h4 class="page-title">List of Utilisateurs</h4>
+                </div>
+
+                <div class="col-sm-4 col-3">
+                    <input type="text" class="form-control" type="text" class="form-control" placeholder="Search" [(ngModel)]="searchText" />
+                </div>
+
+                <div class="col-sm-4 col-6 text-right m-b-20">
+
+                    <a (click)="onAddNewUtilisateur()" class="btn btn btn-primary btn-rounded float-right">
+                        <i class="fa fa-plus"></i> Ajouter Utilisateur</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Username</th>
+                                    <th>Mobile</th>
+                                    <th>Email</th>
+                                    <th>Active</th>
+                                    <th>Poste</th>
+                                    <th>Action</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="
+                        let userDTO of utilisateurDTOList
+                            | filter: searchText
+                            | paginate: { itemsPerPage: 20, currentPage: p }
+                        ">
+                                    <td>
+                                        <img [src]="
+                                      this.crudApi.apiServerUrl +
+                                      '/utilisateurs/avatar/' +
+                                      userDTO.id +
+                                      '?ts=' +
+                                      getTS()
+                                    " class="img-profile rounded-circle" width="70" height="30" *ngIf="img" />
+
+                                        <img class="img-profile rounded-circle" src="assets/admin/img/undraw_profile_2.svg" *ngIf="!img" />
+
+                                    </td>
+
+                                    <td>{{ userDTO?.name }}</td>
+                                    <td>{{ userDTO?.username }}</td>
+                                    <td>{{ userDTO?.mobile }}</td>
+                                    <td>{{ userDTO?.email }}</td>
+                                    <td>{{ userDTO?.active }}
+                                        <button type="button" class="btn btn-primary pull-right" (click)="ActivatedUser(userDTO)" style="cursor: pointer;">
+                                        <i class="fa fa-edit" aria-hidden="true"></i>
+                                    </button>
+                                    </td>
+
+                                    <td>{{ userDTO?.roles[0].name }}</td>
+
+                                    <td class="text-right">
+                                        <button class="btn btn-warning btn-sm" (click)="sendMailToEmployeur(userDTO)">
+                                        <i class="fa fa-envelope" aria-hidden="true"></i></button
+                                      >&nbsp;
+                        
+                        
+                        <button
+                        class="btn btn-primary btn-sm"
+                        [routerLink]="['/admin/accueil/utilisateur', userDTO.id]"
+                      >
+                        <i class="fa fa-edit" aria-hidden="true"></i></button
+                      >&nbsp;
+              
+                        <button
+                          class="btn btn-danger btn-sm"
+                          (click)="onDeleteUtilisateur(userDTO.id)"
+                        >
+                          <i class="fa fa-trash" aria-hidden="true"></i></button
+                        >&nbsp;
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="pagination">
+                  <pagination-controls (pageChange)="p=$event"></pagination-controls>
+                </div>
+              </div>
+            </div>
+          </div>
+  </div>
+</section>
+</div>

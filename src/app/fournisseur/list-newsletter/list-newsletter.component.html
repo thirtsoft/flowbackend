@@ -1,0 +1,80 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Visiteurs</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a routerLink="/admin/accueil/dashboard">Accueil</a></li>
+                        <li class="breadcrumb-item active">Visiteurs</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-4 col-3">
+                    <h4 class="page-title">List of Visiteurs</h4>
+                </div>
+
+                <div class="col-sm-4 col-3">
+                    <input type="text" class="form-control" placeholder="search" [(ngModel)]="searchText" />
+                </div>
+
+
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Code</th>
+                                    <th>Email Visteur</th>
+                                    <th>Date Inscription</th>
+                                    <th>Action</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let newsDTO of newsletterListDTO | filter:searchText | paginate: {itemsPerPage: 25, currentPage: p}; let i=index;">
+                                    <td>{{ newsDTO?.id }}</td>
+                                    <td>{{ newsDTO?.code }}</td>
+                                    <td>{{ newsDTO?.customerEmail }}</td>
+                                    <td>{{ newsDTO?.dateInscription | date: "dd-MM-yyyy" }}</td>
+
+                                    <td class="text-right">
+                                        <button class="btn btn-warning btn-sm" (click)="sendMailToNewsletter(newsDTO)">
+                                            <i class="fa fa-envelope" aria-hidden="true"></i></button
+                                          >&nbsp;
+            
+                                        <button class="btn btn-primary btn-sm" [routerLink]="['/admin/accueil/fournisseur', newsDTO.id]">
+                                        <em class="fa fa-edit" aria-hidden="true"></em></button
+                                      >&nbsp;
+                            
+                                      <button
+                                        class="btn btn-danger btn-sm"
+                                        (click)="onDeleteNewsletter(newsDTO.id)"
+                                      >
+                                        <i class="fa fa-trash" aria-hidden="true"></i></button
+                                      >&nbsp;
+                                    </td>
+            
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="pagination">
+                            <pagination-controls (pageChange)="p=$event"></pagination-controls>
+                        </div>
+                    </div>
+                </div>
+            </div>
+  </div>
+</section>
+</div>

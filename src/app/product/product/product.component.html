@@ -1,0 +1,168 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Products</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a routerLink="/admin/accueil/dashboard">Accueil</a></li>
+                        <li class="breadcrumb-item active">Products</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <h3 *ngIf="!paramId">Ajouter Product</h3>
+                    <h3 *ngIf="paramId">Modifier Product</h3>
+
+                    <form #addProductForm="ngForm" name="form" (ngSubmit)="addProductForm.form.valid">
+                        <div class="form-group">
+                            <label>Reference </label>
+                            <input type="text" class="form-control" [(ngModel)]="formDataProductDTO.reference" name="reference" id="reference" #reference="ngModel" required placeholder="reference">
+                            <span class="text-danger" *ngIf="(reference.touched || addProductForm.submitted) && reference.errors?.['required']">
+                                réference produit est obligatoire
+                        </span>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="form-group col-md-6">
+                                <label> Designation</label>
+                                <input type="text" class="form-control" [(ngModel)]="formDataProductDTO.designation" name="designation" id="designation" #designation="ngModel" required placeholder="designation">
+                                <span class="text-danger" *ngIf="(designation.touched || addProductForm.submitted) && designation.errors?.['required']">
+                                    désignation produit est obligatoire
+                          </span>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label>SubCategorie</label>
+                                <div class="form-group">
+                                    <select name="subCategoryDto" id="subCategoryDto" [(ngModel)]="formDataProductDTO.subCategoryDto" class="form-control" #subCategoryDto="ngModel" required>
+                              <option value="0" selected disabled>-Select-</option>
+                              <option  *ngFor="let subCat of listSubCategoryData" [ngValue]="subCat.id == formDataProductDTO.subCategoryDto?.id ? formDataProductDTO.subCategoryDto : subCat">{{subCat.subCategoryName}}</option>
+                            </select>
+                                    <span class="text-danger" *ngIf="(subCategoryDto.touched || addProductForm.submitted) && subCategoryDto.errors?.['required']">
+                             subCatégorie est obligatoire
+                            </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label>Price</label>
+                                <input type="number" class="form-control" [(ngModel)]="formDataProductDTO.price" name="price" id="price" #price="ngModel" required placeholder="100000">
+                                <span class="text-danger" *ngIf="(price.touched || addProductForm.submitted) && price.errors?.['required']">
+                            Le prix est obligatoire
+                          </span>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label>Current Price</label>
+                                <input type="number" class="form-control" [(ngModel)]="formDataProductDTO.currentPrice" name="currentPrice" id="currentPrice" #currentPrice="ngModel" required placeholder="200000">
+                                <span class="text-danger" *ngIf="(currentPrice.touched || addProductForm.submitted) && currentPrice.errors?.['required']">
+                                    Le prix courrant est obligatoire
+                          </span>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="form-group col-md-6">
+                                <label>Quantité</label>
+                                <input type="number" class="form-control" [(ngModel)]="formDataProductDTO.quantity" name="quantity" id="quantity" #quantity="ngModel" placeholder="quantity" required>
+                                <span class="text-danger" *ngIf="(quantity.touched || addProductForm.submitted) && quantity.errors?.['required']">
+                                    La quantité est obligatoire
+                          </span>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label>Promo</label>
+                                <input type="checkbox" class="form-control" [(ngModel)]="formDataProductDTO.promo" name="promo" id="promo" #promo="ngModel" placeholder="promo" required>
+                                <span class="text-danger" *ngIf="(promo.touched || addProductForm.submitted) && promo.errors?.['required']">
+                                    promo est obligatoire
+                          </span>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="form-group col-md-6">
+                                <label>Selected</label>
+                                <input type="checkbox" class="form-control" [(ngModel)]="formDataProductDTO.selected" name="selected" id="selected" #selected="ngModel" placeholder=" selected" required>
+                                <span class="text-danger" *ngIf="(selected.touched || addProductForm.submitted) && selected.errors?.['required']">
+                                    selected est obligatoire
+                          </span>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label>Photo</label>
+                                <img height="90" width="90" class="img-circle" src="{{
+                                        this.crudApi.apiServerUrl +
+                              '/products/photoProductInFolder/' +
+                              formDataProductDTO.id
+                          }}" *ngIf="paramId" />
+                                <span *ngIf="!editPhoto">
+                                    <input type="file" (change)="onSelectPhotoFile($event)" />
+                                    <button
+                                        *ngIf="paramId"
+                                        class="btn btn-success btn-sm"
+                                        (click)="processForm()"
+                                    >
+                                    <span class="glyphicon glyphicon-upload"></span> Enregistrer la photo
+                                </button>
+                                {{ progress }}
+                                </span>
+
+
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label>Description</label>
+                                <textarea type="text" class="form-control" [(ngModel)]="formDataProductDTO.description" name="description" id="description" #description="ngModel" cols="5" rows="5"></textarea>
+                                <span class="text-danger" *ngIf="(description.touched || addProductForm.submitted) && description.errors?.['required']">
+                                    description est obligatoire
+                          </span>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label>Manufactured</label>
+                                <textarea type="text" class="form-control" [(ngModel)]="formDataProductDTO.manufactured" name="manufactured" id="manufactured" #manufactured="ngModel" cols="5" rows="5"></textarea>
+                                <span class="text-danger" *ngIf="(manufactured.touched || addProductForm.submitted) && manufactured.errors?.['required']">
+                                    manufactured est obligatoire
+                          </span>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <button *ngIf="!paramId" type="submit" class="btn btn-success" (click)="onSaveProductWithFile()" style="cursor: pointer">
+                                <i class="fa fa-database"></i> Enregistrer</button
+                              >&nbsp;
+                              <button
+                                *ngIf="paramId"
+                                class="btn btn-warning"
+                                (click)="onUpdateProduct()"
+                                style="cursor: pointer"
+                              >
+                                <i class="fa fa-database"></i>Modifié
+                              </button>
+                            <button type="button" class="btn btn-danger ml-1" (click)="goBack()">
+                                <i class="fa fa-arrow-left"></i> Close
+                              </button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,79 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <!--  <h1>Régions</h1> -->
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a routerLink="/admin/accueil/dashboard">Accueil</a></li>
+                        <li class="breadcrumb-item active">Régions</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-4 col-3">
+                    <h3>List of Régions</h3>
+
+                </div>
+
+                <div class="col-sm-4 col-3">
+                    <input type="text" class="form-control" placeholder="search" [(ngModel)]="searchText" />
+                </div>
+
+                <div class="col-sm-4 col-6 text-right m-b-20">
+
+                    <a (click)="onAddCountry()" class="btn btn btn-primary btn-rounded float-right">
+                        <i class="fa fa-plus"></i>Ajouter Country</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Code</th>
+                                    <th>Name</th>
+                                    <th class="text-right">Action</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let countDTO of countryListDTO | filter:searchText | paginate: {itemsPerPage: 15, currentPage: p}; let i=index;">
+                                    <td>{{ countDTO?.id }}</td>
+                                    <td>{{ countDTO?.code }}</td>
+                                    <td>{{ countDTO?.name }}</td>
+
+                                    <td class="text-right">
+                                        <button class="btn btn-primary btn-lg" [routerLink]="['/admin/accueil/localities/country', countDTO.id]">
+                                        <em class="fa fa-edit" aria-hidden="true"></em></button
+                                      >&nbsp;
+                            
+                                      <button
+                                        class="btn btn-danger btn-lg"
+                                        (click)="onDeleteCountry(countDTO.id)"
+                                      >
+                                        <i class="fa fa-trash" aria-hidden="true"></i></button
+                                      >&nbsp;
+                                    </td>
+            
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="pagination">
+                            <pagination-controls (pageChange)="p=$event"></pagination-controls>
+                        </div>
+                    </div>
+                </div>
+            </div>
+  </div>
+</section>
+</div>

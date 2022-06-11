@@ -1,0 +1,90 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>SubCatégories</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a routerLink="/admin/accueil/dashboard">Accueil</a></li>
+                        <li class="breadcrumb-item active">SubCatégories</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <h2 *ngIf="!paramId">Nouvelle SubCatégorie</h2>
+                    <h2 *ngIf="paramId">Modifié SubCatégorie</h2>
+                    <form #addCategoryForm="ngForm">
+
+                        <div class="form-group">
+
+                            <label>Designation</label>
+                            <input type="text" placeholder="Designation" class="form-control" [(ngModel)]="formDataSubCategoryDTO.subCategoryName" name="subCategoryName" id="subCategoryName" #subCategoryName="ngModel" required />
+                            <span class="text-danger" *ngIf="
+                        (subCategoryName.touched || addCategoryForm.submitted) &&
+                        subCategoryName.errors?.['required']
+                      ">
+                      subCategoryName est obligatoire
+                    </span>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>Categories</label>
+
+                            <select name="categoryDto" id="categoryDto" [(ngModel)]="formDataSubCategoryDTO.categoryDto" class="form-control" #categoryDto="ngModel" required>
+                        <option value="0" selected disabled>-Select-</option>
+                        <option  *ngFor="let subCat of listDataCategoriesDTOs" [ngValue]="subCat.id == formDataSubCategoryDTO.categoryDto?.id ? formDataSubCategoryDTO.categoryDto : subCat">{{subCat.categoryName}}</option>
+                      </select>
+                            <span class="text-danger" *ngIf="(categoryDto.touched || addCategoryForm.submitted) && categoryDto.errors?.['required']">
+                            categoryDto est obligatoire
+                      </span>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>Description</label>
+                            <textarea type="text" class="form-control" [(ngModel)]="formDataSubCategoryDTO.description" id="" #description="ngModel" name="description" cols="5" rows="5"></textarea>
+                            <span class="text-danger" *ngIf="
+                        (description.touched || addCategoryForm.submitted) &&
+                        description.errors?.['required']
+                      ">
+                      description est obligatoire
+                    </span>
+
+                        </div>
+
+                        <div class="form-group">
+                            <button *ngIf="!paramId" type="submit" class="btn btn-success" (click)="onAddSubCategory()" style="cursor: pointer;">
+                  <i class="fa fa-database"></i> Enregistrer</button
+                >&nbsp;
+                <button
+                  *ngIf="paramId"
+                  class="btn btn-warning"
+                  (click)="onUpdateSubCategory()"
+                  style="cursor: pointer;"
+                >
+                  <i class="fa fa-database"></i>Modifié
+                </button>
+                            <button type="button" class="btn btn-danger ml-1" (click)="goBack()" style="cursor: pointer;">
+                  <i class="fa fa-close"></i> Fermer
+                </button>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</div>

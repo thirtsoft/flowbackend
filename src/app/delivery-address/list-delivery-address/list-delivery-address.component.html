@@ -1,0 +1,75 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <!--  <h1>AddressesLivraisons</h1> -->
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a routerLink="/admin/accueil/dashboard">Accueil</a></li>
+                        <li class="breadcrumb-item active">AddresseLivraisons</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-4 col-3">
+                    <h4 class="page-title">List of Addresses de Livraison</h4>
+                </div>
+
+                <div class="col-sm-4 col-3">
+                    <input type="text" class="form-control" type="text" class="form-control" placeholder="Search" [(ngModel)]="searchText" />
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Rue</th>
+                                    <th>Quartier</th>
+                                    <th>Département</th>
+                                    <th>Région</th>
+                                    <th>Code Zip</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="
+                            let addDTO of addressDTOList
+                                | filter: searchText
+                                | paginate: { itemsPerPage: 20, currentPage: p }
+                            ">
+
+
+                                    <td>{{ addDTO?.rue }}</td>
+                                    <td>{{ addDTO?.city }}</td>
+                                    <td>{{ addDTO?.stateDto.name }}</td>
+                                    <td>{{ addDTO?.stateDto.countryDto.name }}</td>
+                                    <td>{{ addDTO?.zipcode }}</td>
+
+
+                                    <td class="text-right">
+
+                                        <button class="btn btn-danger btn-sm" (click)="onDeleteAddress(addDTO.id)">
+                                        <i class="fa fa-trash" aria-hidden="true"></i></button
+                                      >&nbsp;
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div class="pagination">
+                      <pagination-controls (pageChange)="p=$event"></pagination-controls>
+                    </div>
+                  </div>
+                </div>
+              </div>
+  </div>
+</section>
+</div>

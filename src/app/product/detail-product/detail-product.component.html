@@ -1,0 +1,123 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Détail Product</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a routerLink="/admin/accueil/dashboard">Accueil</a></li>
+                        <li class="breadcrumb-item active">Détail Product</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <form #addProductForm="ngForm">
+
+                        <div class="col-sm-4 pull-right">
+                            <div class="sticky-top">
+
+
+
+                                <img height="90" width="90" src="{{
+                                this.crudApi.apiServerUrl +
+                                  '/products/photoProductInFolder/' +
+                                  productDTO.id
+                              }}" alt="Product Image" />
+
+
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label>Réference </label>
+                                <input type="text" class="form-control" [(ngModel)]="productDTO.reference" name="reference" id="reference" readonly>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label>Désignation</label>
+                                <input type="text" class="form-control" [(ngModel)]="productDTO.designation" name="designation" id="designation" readonly>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label>Price</label>
+                                <input type="number" class="form-control" [(ngModel)]="productDTO.price" name="price" id="price" readonly>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label>currentPrice</label>
+                                <input type="number" class="form-control" [(ngModel)]="productDTO.currentPrice" name="currentPrice" id="currentPrice" readonly>
+                            </div>
+
+                        </div>
+
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label>SubCatégorie</label>
+                                <div class="form-group">
+                                    <select name="subCategoryDto" id="subCategoryDto" [(ngModel)]="productDTO.subCategoryDto" class="form-control" readonly>
+                                <option value=0>-Select-</option>
+                                <option  *ngFor="let scat of listSubCategoryDTO" [ngValue]="scat.id == productDTO.subCategoryDto?.id ? productDTO.subCategoryDto : scat">{{scat.subCategoryName}}</option>
+                              </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label>Quantity</label>
+                                <input type="number" class="form-control" [(ngModel)]="productDTO.quantity" name="quantity" id="quantity" readonly>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label>Selected</label>
+                                <input type="checkbox" class="form-control" [(ngModel)]="productDTO.selected" name="selected" id="selected" readonly>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label>promo</label>
+                                <input type="checkbox" class="form-control" [(ngModel)]="productDTO.promo" name="promo" id="promo" readonly>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="form-group col-md-6">
+                                <label>Description</label>
+                                <textarea type="text" class="form-control" [(ngModel)]="productDTO.description" name="description" id="description" cols="5" rows="5" readonly></textarea>
+
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label>Manufactured</label>
+                                <textarea type="text" class="form-control" [(ngModel)]="productDTO.manufactured" name="manufactured" id="manufactured" cols="5" rows="5" readonly></textarea>
+
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <button (click)="goBack()" type="button" class="btn btn-warning btn-lg btn-block" style="cursor: pointer;">
+                                <i class="fa fa-arrow-left" aria-hidden="true"></i> Retour
+                              </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

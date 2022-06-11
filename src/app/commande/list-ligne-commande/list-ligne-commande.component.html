@@ -1,0 +1,81 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <!--  <h1>DétailsCommandes</h1> -->
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a routerLink="/admin/accueil/dashboard">Accueil</a></li>
+                        <li class="breadcrumb-item active">DétailsCommandes</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-4 col-3">
+                    <h4 class="page-title">détails Commandes</h4>
+                </div>
+
+                <div class="col-sm-4 col-3">
+                    <input type="text" class="form-control" type="text" class="form-control" placeholder="Search" [(ngModel)]="searchText" />
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Numero Commande</th>
+                                    <th>Produit</th>
+                                    <th>P.Unitaire</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th>Date</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="
+                            let lcomDTO of ligneCommandeDTOList
+                                | filter: searchText
+                                | paginate: { itemsPerPage: 20, currentPage: p }
+                            ">
+
+
+                                    <td>{{ lcomDTO?.commandeDto.numeroCommande }}</td>
+                                    <td>{{ lcomDTO?.productName }}</td>
+                                    <td>{{ lcomDTO?.price }}</td>
+                                    <td>{{ lcomDTO?.quantity }}</td>
+                                    <td>
+                                        {{ lcomDTO?.price * lcomDTO?.quantity }}
+                                    </td>
+                                    <td>
+                                        {{ lcomDTO?.commandeDto?.dateCommande | date: "dd-MM-yyyy" }}
+                                    </td>
+
+                                    <td class="text-right">
+
+
+                                        <button class="btn btn-warning btn-lg" (click)="viewAllCommandes()">
+                                            <i class="fa fa-eye" aria-hidden="true"></i></button
+                                          >&nbsp;
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div class="pagination">
+                      <pagination-controls (pageChange)="p=$event"></pagination-controls>
+                    </div>
+                  </div>
+                </div>
+              </div>
+  </div>
+</section>
+</div>
