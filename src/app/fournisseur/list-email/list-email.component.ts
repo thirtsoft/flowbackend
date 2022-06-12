@@ -56,7 +56,6 @@ export class ListEmailComponent implements OnInit {
         alert(error.message);
       }
     );
-
   }
 
   responseToMail(item: EmailDto) {

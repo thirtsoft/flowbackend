@@ -6,6 +6,7 @@ import { ClientDto } from '../models/client';
 import { CommandeDto } from '../models/commande';
 import { FournisseurDto } from '../models/fournisseur';
 import { LigneCommandeDto } from '../models/ligne-commande';
+import { RatingDto } from '../models/rating';
 import { WishlistDto } from '../models/wishlist';
 
 @Injectable({
@@ -70,11 +71,15 @@ export class DashboardService {
     return this.http.get<any>(`${this.apiServerUrl}/fournisseurs/countNumberOfFournisseur`);
   }
 
-  public countNumberOfRating(): Observable<WishlistDto[]> {
-    return this.http.get<WishlistDto[]>(`${this.apiServerUrl}/ratings/countNumberOfRating`);
+  public countNumberOfRating(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiServerUrl}/ratings/countNumberOfRating`);
   }
 
-  public countNumberOfRatingByProductId(noteId: string): Observable<WishlistDto> {
-    return this.http.get<WishlistDto>(`${this.apiServerUrl}/ratings/countNumberOfRatingByProductId/${noteId}`);
+  public countNumberOfRatingByProductId(noteId: string): Observable<any> {
+    return this.http.get<any>(`${this.apiServerUrl}/ratings/countNumberOfRatingByProductId/${noteId}`);
+  }
+
+  public countNumberOfEmailRequest(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiServerUrl}/emails/countNumberOfEmail`);
   }
 }
