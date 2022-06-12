@@ -5,15 +5,23 @@
         <span class="brand-text font-weight-light">AdminLTE 3</span>
     </a>
 
-    <!-- Sidebar -->
     <div class="sidebar">
-        <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="../../../assets/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                <img src="../../../assets/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" *ngIf="!img">
+            </div>
+
+            <div class="image">
+                <img [src]="
+                this.userService.apiServerUrl +
+                '/utilisateurs/avatar/' +
+                this.userId +
+                '?ts=' +
+                getTS()
+              " class="img-circle elevation-2" *ngIf="img" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Alexander Pierce</a>
+                <a (click)="getProfile()" class="d-block" style="cursor: pointer;">{{ username }}</a>
             </div>
         </div>
 
@@ -32,8 +40,6 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <!-- Add icons to the links using the .nav-icon class
-           with font-awesome or any other icon font library -->
                 <li class="nav-item menu-open">
                     <a routerLink="/admin/accueil/dashboard" class="nav-link active">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -82,19 +88,19 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
+                        <li class="nav-item" *ngIf="!this.showUserBoard">
                             <a routerLink="/admin/accueil/categories" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Catégories</p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" *ngIf="!this.showUserBoard">
                             <a routerLink="/admin/accueil/categories/subCategories" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>SousCategories</p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" *ngIf="!this.showUserBoard">
                             <a routerLink="/admin/accueil/products/listProducts" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Products</p>
@@ -104,7 +110,7 @@
                     </ul>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="this.showAdminBoard || this.showManagerBoard">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-copy"></i>
                         <p>
@@ -165,7 +171,7 @@
                             </a>
                         </li>
 
-                        <li class="nav-item">
+                        <li class="nav-item" *ngIf="this.showAdminBoard">
                             <a routerLink="/admin/accueil/commandes/detailsCommandes" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>DétailsCommandes</p>
@@ -182,7 +188,7 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="this.showAdminBoard">
                     <a routerLink="/admin/accueil/charts" class="nav-link">
                         <i class="nav-icon fas fa-chart-pie"></i>
                         <p>
@@ -225,7 +231,7 @@
                         </li>
                     </ul>
                 </li> -->
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="this.showAdminBoard || this.showManagerBoard">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-tree"></i>
                         <p>
@@ -248,7 +254,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="this.showAdminBoard">
                     <a href="#" class="nav-link">
                         <i class="far fa-bell"></i>
                         <p>
@@ -280,7 +286,7 @@
                     </ul>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="this.showAdminBoard || this.showManagerBoard">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-edit"></i>
                         <p>
@@ -305,7 +311,7 @@
                     </ul>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="this.showAdminBoard">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-table"></i>
                         <p>
@@ -339,20 +345,20 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
+                        <li class="nav-item" *ngIf="this.showAdminBoard">
                             <a routerLink="/admin/accueil/utilisateurs/listUtilisateurs" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Utilisateurs</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a routerLink="/admin/accueil/utilisateurs/profil" class="nav-link">
+                            <a (click)="getProfile()" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Profile</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a routerLink="/admin/accueil/utilisateurs/listUtilisateurs" class="nav-link">
+                        <li class="nav-item" *ngIf="this.showAdminBoard">
+                            <a routerLink="/auth/register" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Créer compte</p>
                             </a>
@@ -513,7 +519,9 @@
                         </li>
                     </ul>
                 </li> -->
-                <li class="nav-header">MISCELLANEOUS</li>
+                <li class="nav-header" (click)="logout()" style="cursor: pointer;">
+                    <i class="fa fa-sign-out-alt"></i>&nbsp; Deconnexion
+                </li>
 
 
                 <!--  <li class="nav-item">

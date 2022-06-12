@@ -19,12 +19,12 @@ const routes: Routes = [
     component: UtilisateurComponent 
   },
   {
-    path: 'profil/:id',
+    path: 'profile/:id',
     component: ProfileUtilisateurComponent
   },
 
   {
-    path: 'profil',
+    path: 'profile',
     component: ProfileUtilisateurComponent
   },
 ];
