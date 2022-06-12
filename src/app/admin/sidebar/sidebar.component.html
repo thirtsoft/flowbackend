@@ -9,17 +9,18 @@
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
                 <img src="../../../assets/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" *ngIf="!img">
-            </div>
 
-            <div class="image">
                 <img [src]="
                 this.userService.apiServerUrl +
                 '/utilisateurs/avatar/' +
                 this.userId +
                 '?ts=' +
                 getTS()
-              " class="img-circle elevation-2" *ngIf="img" alt="User Image">
+              " class="img-circle elevation-2" *ngIf="img" alt="User Image" height="160" width="160">
+
             </div>
+
+
             <div class="info">
                 <a (click)="getProfile()" class="d-block" style="cursor: pointer;">{{ username }}</a>
             </div>
