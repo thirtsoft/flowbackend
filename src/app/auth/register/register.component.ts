@@ -23,7 +23,8 @@ export class RegisterComponent implements OnInit {
     { name: 'Manager', id:2, selected: false },
     { name: 'Admin', id:3, selected: false },
   ];
-  selectedRoles: string[]=[];
+//  selectedRoles: string[]=[];
+  selectedRoles!: string[];
 
   constructor(private authService: AuthService,
               private toastr :ToastrService,
@@ -40,12 +41,12 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  createRoles(rolesList: any[]): FormArray {
-    const arr = rolesList.map((role: any) => {
+  createRoles(rolesList:any[]): FormArray {
+    const arr = rolesList.map((role:any) => {
       return new FormControl(role.selected)
     });
     console.log("CreateRole:" +arr);
-    return new FormArray(arr);
+    return new FormArray(arr) ;
   }
 
   onSubmit() {
@@ -55,13 +56,13 @@ export class RegisterComponent implements OnInit {
     this.user.email = this.registrationForm.value.email;
     this.user.password = this.registrationForm.value.password;
     console.log("SelectedRole: " +this.getSelectedRoles());
-  //  this.user.roles = this.getSelectedRoles();
+    this.user.roles = this.getSelectedRoles();
+    console.log("UserRole: " +this.user.roles);
     this.registerUser();
   }
 
   registerUser() {
     console.log(this.user);
-
     this.authService.signUp(this.user)
     .subscribe(response=> {
       console.log(response);
@@ -71,7 +72,7 @@ export class RegisterComponent implements OnInit {
         timeOut: 1500,
         positionClass: 'toast-top-right',
       });
-      this.router.navigateByUrl("/admin/signIn");
+      this.router.navigateByUrl("auth/login");
     },
     error => {
       this.errorMessage = error.error.message;
@@ -81,10 +82,8 @@ export class RegisterComponent implements OnInit {
 
   }
 
-  getSelectedRoles():string  {
-    return '';
-    /*
-    this.selectedRoles = this.registrationForm.value.roleSelection.map((selected:any, i) => {
+  getSelectedRoles():string[]  {
+    this.selectedRoles = this.registrationForm.value.roleSelection.map((selected:any, i:any) => {
       console.log("IsSelected: " +selected);
       if(selected){
         return this.roles[i].name;
@@ -93,13 +92,13 @@ export class RegisterComponent implements OnInit {
       }
     });
    
-    return this.selectedRoles.filter(function (element) {
+    return this.selectedRoles.filter(function (element:any) {
       if (element !== '') {
         console.log("ElementReturn: " +element);
         return element;
       }
     });
-    */
+  
   }
 
 }

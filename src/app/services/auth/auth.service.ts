@@ -9,7 +9,7 @@ import { ProfileInfo, UpdatePasswordInfo, UpdatePasswordUser, UpdateProfilInfo, 
 import { Register } from './register';
 import { TokenStorageService } from './token-storage.service';
 
-const AUTH_API = 'http://localhost:8081/casa-solaire/v1/';
+const AUTH_API = 'http://localhost:8081/flowers/v1/';
 //const AUTH_API = "http://62.171.128.8:8080/dpshop-backend-0.0.1-SNAPSHOT/shop-mania/v1/";
 
 const TOKEN_KEY = 'AuthToken';
@@ -25,9 +25,11 @@ export class AuthService {
 
   apiServerUrl = environment.apiBaseUrl;
 
-  loginUrl = 'http://localhost:8081/casa-solaire/v1/auth/authenticated';
+  
 
-  baseUrl_1 = 'http://localhost:8081/casa-solaire/v1';
+  loginUrl = 'http://localhost:8081/flowers/v1/auth/authenticated';
+
+  baseUrl_1 = 'http://localhost:8081/flowers/v1';
 
   choixmenu : string  = 'A';
   dataForm!: FormGroup;
