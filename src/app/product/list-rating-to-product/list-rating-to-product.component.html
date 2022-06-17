@@ -50,12 +50,11 @@
                                     <td>{{ ratDTO?.productDto?.designation }}</td>
                                     <td>{{ ratDTO?.utilisateurDto.name }}</td>
                                     <td>{{ ratDTO?.observation }}</td>
-                                    <td>{{ ratDTO?.promo }}</td>
-                                    <td>{{ ratDTO?.createdDate | date: 'DD-MM-yyyy' }}</td>
+                                    <td>{{ ratDTO?.createdDate | date: 'dd-MM-yyyy' }}</td>
 
-                                    <td class="text-right">
+                                    <td>
 
-                                        <button class="btn btn-danger btn-sm" (click)="onDeleteRating(ratDTO.id)">
+                                        <button class="btn btn-danger btn-lg" (click)="onDeleteRating(ratDTO.id)">
                           <i class="fa fa-trash" aria-hidden="true"></i></button
                         >&nbsp;
                       </td>
