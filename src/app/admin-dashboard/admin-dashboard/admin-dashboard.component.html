@@ -36,7 +36,7 @@
                         <div class="icon">
                             <i class="ion ion-bag"></i>
                         </div>
-                        <a routerLink="/admin/commandes-encours" class="small-box-footer">Voir plus <i class="fas fa-arrow-circle-right"></i></a>
+                        <a routerLink="/admin/commandes-encours" class="small-box-footer" style="cursor: pointer;">Voir plus <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -50,7 +50,7 @@
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
                         </div>
-                        <a (click)="goToListOfCommande()" class="small-box-footer">Voir plus <i class="fas fa-arrow-circle-right"></i></a>
+                        <a (click)="goToListOfCommande()" class="small-box-footer" style="cursor: pointer;">Voir plus <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -64,7 +64,7 @@
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
                         </div>
-                        <a (click)="goToListOfClient()" class="small-box-footer">Voir <i class="fas fa-arrow-circle-right"></i></a>
+                        <a (click)="goToListOfClient()" class="small-box-footer" style="cursor: pointer;">Voir plus <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -72,13 +72,13 @@
                     <!-- small box -->
                     <div class="small-box bg-danger">
                         <div class="inner">
-                            <h3>{{numberOfCommandeByPendingStatus}}</h3>
-                            <p>Commande-Encours</p>
+                            <h3>{{numberOfRegistersInMont}}</h3>
+                            <p>Nouveau Membre</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-pie-graph"></i>
+                            <i class="ion ion-person-add"></i>
                         </div>
-                        <a routerLink="/admin/commandes-encours" style="cursor: pointer" class="small-box-footer">Voir plus<i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="#" class="small-box-footer">Voir plus<i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->

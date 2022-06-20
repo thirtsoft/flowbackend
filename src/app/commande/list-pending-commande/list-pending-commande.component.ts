@@ -1,8 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
 import { MatDialog, MAT_DIALOG_DATA, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CommandeDto } from 'src/app/models/commande';
 import { CommandeService } from 'src/app/services/commande.service';
@@ -16,10 +16,10 @@ import { UpdateStatusCommandeComponent } from '../update-status-commande/update-
 export class ListPendingCommandeComponent implements OnInit {
 
   commandeDTOList!: CommandeDto[];
-
   id!: number;
   p: number=1;
   searchText: any;
+  public dialogConfig = new MatDialogConfig();
 
   constructor(public crudApi: CommandeService,
               public router: Router,
@@ -45,15 +45,28 @@ export class ListPendingCommandeComponent implements OnInit {
     );
   }
 
+  /*
   addEditStatusCommande(item : CommandeDto) {
     this.crudApi.choixmenu == 'M';
     this.crudApi.formData = this.fb.group(Object.assign({},item));
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.autoFocus = true;
-    dialogConfig.disableClose = true;
-    dialogConfig.width="50%";
-    this.matDialog.open(UpdateStatusCommandeComponent, dialogConfig);
+    */
+  //  const dialogConfig = new MatDialogConfig();
+  /*
+    this.dialogConfig.autoFocus = true;
+    this.dialogConfig.disableClose = true;
+    this.dialogConfig.width="50%";
+    this.matDialog.open(UpdateStatusCommandeComponent, this.dialogConfig);
+
   }
+  */
+
+  addEditStatusCommande(item : CommandeDto) {
+    this.crudApi.choixmenu == 'M';
+    this.crudApi.formData = this.fb.group(Object.assign({},item));
+    this.router.navigate(['/admin/accueil/commandes/update-status', this.crudApi.formData]);
+
+  }
+  
 
   viewAllCommandes() {
     this.router.navigate(['/admin/accueil/commandes']);

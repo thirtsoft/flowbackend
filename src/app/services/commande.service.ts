@@ -12,8 +12,8 @@ export class CommandeService {
 
   apiServerUrl = environment.apiBaseUrl;
 
-  choixmenu : string  = 'A';
-  formData!: FormGroup;
+  choixmenu: string  = 'A';
+  public formData!: FormGroup;
 
   constructor(private http: HttpClient) {
   }

@@ -18,6 +18,7 @@ export class AdminDashboardComponent implements OnInit {
   numberOfNotificationInMonth: any;
   numberOfClients: any;
   numberOfFournisseurs: any;
+  numberOfRegistersInMont: any;
 
   Barchart: any = [];
 
@@ -34,7 +35,7 @@ export class AdminDashboardComponent implements OnInit {
 
     this.getNumberOfClients();
 
-    this.getNumberOfFournisseurs();
+  //  this.getNumberOfFournisseurs();
 
     this.getSumOfOdersInDay();
 
@@ -46,9 +47,11 @@ export class AdminDashboardComponent implements OnInit {
 
     this.getSumOfOdersInMonth();
 
-    this.getSumOfOdersInYear();
+ //   this.getSumOfOdersInYear();
 
     this.getNumberOfNotificationInMonth();
+
+    this.getNumberOfRegistersInMonth();
 
   }
 
@@ -59,11 +62,13 @@ export class AdminDashboardComponent implements OnInit {
     });
   }
 
+  /*
   getNumberOfFournisseurs(): void {
     this.crupdApi.countNumberOfFournisseurs().subscribe(data => {
       this.numberOfFournisseurs = data;
     });
   }
+  */
 
   getNumberOfOrders(): void {
     this.crupdApi.countNumberOfCommande().subscribe(response => {
@@ -97,17 +102,26 @@ export class AdminDashboardComponent implements OnInit {
     });
   }
 
+  /*
   getSumOfOdersInYear(): void {
     this.crupdApi.sumTotaleOfCommandeInYear()
       .subscribe(response => {
       this.sumOfCommandeInYear = response;
     });
   }
+  */
 
   getNumberOfNotificationInMonth(): void {
     this.crupdApi.countNumberOfRating()
       .subscribe(response => {
       this.numberOfNotificationInMonth = response;
+    });
+  }
+
+  getNumberOfRegistersInMonth(): void {
+    this.crupdApi.countNumberOfRegistersInMonth().subscribe(data => {
+      this.numberOfRegistersInMont = data;
+      console.log(data);
     });
   }
 

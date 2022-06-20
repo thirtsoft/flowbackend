@@ -7,6 +7,7 @@ import { CommandeDto } from '../models/commande';
 import { FournisseurDto } from '../models/fournisseur';
 import { LigneCommandeDto } from '../models/ligne-commande';
 import { RatingDto } from '../models/rating';
+import { UtilisateurDto } from '../models/utilisateur';
 import { WishlistDto } from '../models/wishlist';
 
 @Injectable({
@@ -65,6 +66,14 @@ export class DashboardService {
 
   public countNumberOfClient(): Observable<ClientDto[]> {
     return this.http.get<ClientDto[]>(`${this.apiServerUrl}/clients/countNumberOfClient`);
+  } 
+
+  public countNumberOfRegistersInMonth(): Observable<any> {
+    return this.http.get<any[]>(`${this.apiServerUrl}/utilisateurs/countNumberOfRegisterInMonth`);
+  }
+
+  public countNumberOfRegistersPeerMonth(): Observable<UtilisateurDto[]> {
+    return this.http.get<UtilisateurDto[]>(`${this.apiServerUrl}/utilisateurs/countNumberOfRegisterPeerMonth`);
   }
 
   public countNumberOfFournisseurs(): Observable<any> {

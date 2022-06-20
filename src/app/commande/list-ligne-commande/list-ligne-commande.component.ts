@@ -30,7 +30,7 @@ export class ListLigneCommandeComponent implements OnInit {
   }
 
   getListOfLigneCommandesDTOs(): void {
-    this.crudApi.getLigneCommandeDtosOrderByIdDesc().subscribe(
+    this.crudApi.getAllOrderITemsDtosOrderByIdDesc().subscribe(
       (response: LigneCommandeDto[]) => {
         this.ligneCommandeDTOList = response;
       },

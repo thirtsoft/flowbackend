@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
+
+/*
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxPaginationModule } from 'ngx-pagination' ;
+*/
 
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -20,7 +23,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule, 
+  //  CommonModule, 
     /*
     ReactiveFormsModule, 
     FormsModule,
@@ -41,14 +44,14 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     */
   ],
   exports: [ 
-    CommonModule, 
+ //   CommonModule, 
     /*
     ReactiveFormsModule, 
     FormsModule,
     Ng2SearchPipeModule, 
     NgxPaginationModule,
+    */
     MatDialogModule, 
-    MatDialogRef,
     MatIconModule,
     MatInputModule,
     MatFormFieldModule,
@@ -59,7 +62,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatCardModule,
     MatExpansionModule,
     MatPaginatorModule
-    */
+    
   ]
 })
 export class SharedModule { }

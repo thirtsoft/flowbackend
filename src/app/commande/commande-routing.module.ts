@@ -4,6 +4,7 @@ import { ListCommandeComponent } from './list-commande/list-commande.component';
 import { ListLigneCommandeComponent } from './list-ligne-commande/list-ligne-commande.component';
 import { ListPayedCommandeComponent } from './list-payed-commande/list-payed-commande.component';
 import { ListPendingCommandeComponent } from './list-pending-commande/list-pending-commande.component';
+import { UpdateStatusCommandeComponent } from './update-status-commande/update-status-commande.component';
 import { ViewCommandeComponent } from './view-commande/view-commande.component';
 
 const routes: Routes = [
@@ -14,6 +15,10 @@ const routes: Routes = [
   { 
     path: 'commande-encours', 
     component: ListPendingCommandeComponent 
+  },
+  { 
+    path: 'update-status', 
+    component: UpdateStatusCommandeComponent 
   },
   {
     path: 'commande-payees',

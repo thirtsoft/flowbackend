@@ -8,13 +8,15 @@ import { ChartComponent } from './chart/chart.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NbreRegisterPeerMonthComponent } from './nbre-register-peer-month/nbre-register-peer-month.component';
 
 
 @NgModule({
   declarations: [
     ChiffAffOrderPeerMonthComponent,
     ChiffAffOrderPeerYearComponent,
-    ChartComponent
+    ChartComponent,
+    NbreRegisterPeerMonthComponent
   ],
   imports: [
     CommonModule,
