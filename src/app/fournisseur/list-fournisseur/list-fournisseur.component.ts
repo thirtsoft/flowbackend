@@ -61,9 +61,13 @@ export class ListFournisseurComponent implements OnInit {
 
   onAddFournisseur() {
     this.router.navigate(['/admin/accueil/fournisseurs/fournisseur']);
-  }
+  } 
 
   sendMailToFournisseur(item: FournisseurDto) {
+    this.crudApi.dataForm = this.fb.group(Object.assign({},item));
+    console.log(this.crudApi.dataForm);
+    this.router.navigate(['/admin/accueil/fournisseurs/mail-to-fournisseur', this.crudApi.dataForm]);
+  //  this.router.navigate(['/admin/accueil/fournisseurs/mail-to-fournisseur']);
   }
 
   /*

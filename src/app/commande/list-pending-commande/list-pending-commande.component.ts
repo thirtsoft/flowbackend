@@ -64,7 +64,6 @@ export class ListPendingCommandeComponent implements OnInit {
     this.crudApi.choixmenu == 'M';
     this.crudApi.formData = this.fb.group(Object.assign({},item));
     this.router.navigate(['/admin/accueil/commandes/update-status', this.crudApi.formData]);
-
   }
   
 

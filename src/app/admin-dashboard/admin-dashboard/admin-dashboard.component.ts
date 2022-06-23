@@ -126,12 +126,17 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   goToListOfClient() {
-    this.router.navigateByUrl("admin/accueil/clients");
+    this.router.navigateByUrl("admin/accueil/deliveries/clients");
   }
 
   goToListOfCommande() {
     this.router.navigateByUrl("admin/accueil/commandes");
   }
+
+  goToListOfPendingCommande() {
+    this.router.navigateByUrl("admin/accueil/commandes/commande-encours");
+  }
+  
 
 
 }

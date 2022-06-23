@@ -11,6 +11,10 @@ import { MailToFournisseurComponent } from './mail-to-fournisseur/mail-to-fourni
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 
 
 @NgModule({
@@ -28,7 +32,21 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule, 
     FormsModule,
     Ng2SearchPipeModule, 
-    NgxPaginationModule
+    NgxPaginationModule,
+
+    MatDialogModule,
+    MatFormFieldModule, 
+    MatButtonModule, 
+    MatInputModule,
+  ],
+  providers: [
+    { provide: MAT_DIALOG_DATA, useValue: {} ,},
+    { provide: MatDialogRef, useValue: {} },
+  ],
+  entryComponents:[
+    ListFournisseurComponent, ListEmailComponent,
+    ListNewsletterComponent, FournisseurComponent,
+    MailToFournisseurComponent, MailToNewsletterComponent
   ]
 })
 export class FournisseurModule { }

@@ -1,4 +1,4 @@
-<div class="row justify-content-center">
+<!-- <div class="row justify-content-center">
     <div class="col-md-8 col-md-offset-2">
         <h3>Envoi Email au Fournisseur</h3>
         <form [formGroup]="this.crudApi.dataForm" (ngSubmit)="onSubmit()">
@@ -27,4 +27,58 @@
             </div>
         </form>
     </div>
+</div> -->
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h3>Envoi Email</h3>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a routerLink="/admin/accueil/dashboard">Accueil</a></li>
+                        <li class="breadcrumb-item active">Envoi Email</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <h3>Envoi Email au Fournisseur</h3>
+                    <form [formGroup]="this.crudApi.dataForm" (ngSubmit)="onSubmit()">
+                        <input type="hidden" formControlName="id" id="id" />
+                        <div class="form-group">
+                            <label>A</label>
+                            <input type="text" class="form-control" formControlName="email" id="email" readonly />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Object</label>
+                            <input type="text" class="form-control" formControlName="subject" id="subject" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Message</label>
+                            <textarea name="message" class="form-control" formControlName="message" id="message" cols="30" rows="10"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Envoi Email</button
+                      >&nbsp;
+                      <button type="button" class="btn btn-danger">
+                        <em class="fa fa-close"></em> Fermer
+                      </button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
 </div>

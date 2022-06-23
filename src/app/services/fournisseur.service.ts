@@ -10,11 +10,10 @@ import { FournisseurDto } from '../models/fournisseur';
 })
 export class FournisseurService {
 
-  apiServerUrl = environment.apiBaseUrl;
+  public apiServerUrl = environment.apiBaseUrl;
 
-  choixmenu : string  = 'A';
- 
-  dataForm!: FormGroup;
+  public choixmenu : string  = 'A';
+  public dataForm!: FormGroup;
 
   constructor(private http: HttpClient) {
   }

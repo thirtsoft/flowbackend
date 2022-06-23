@@ -4,6 +4,8 @@ import { FournisseurComponent } from './fournisseur/fournisseur.component';
 import { ListEmailComponent } from './list-email/list-email.component';
 import { ListFournisseurComponent } from './list-fournisseur/list-fournisseur.component';
 import { ListNewsletterComponent } from './list-newsletter/list-newsletter.component';
+import { MailToFournisseurComponent } from './mail-to-fournisseur/mail-to-fournisseur.component';
+import { MailToNewsletterComponent } from './mail-to-newsletter/mail-to-newsletter.component';
 
 const routes: Routes = [
   {
@@ -26,6 +28,14 @@ const routes: Routes = [
     path: 'emails', 
     component: ListEmailComponent 
   },
+  {
+    path: 'mail-to-fournisseur',
+    component: MailToFournisseurComponent
+  },
+  {
+    path: 'mail-to-newsletter',
+    component: MailToNewsletterComponent
+  }
 ];
 
 @NgModule({

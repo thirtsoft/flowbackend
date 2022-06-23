@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { FournisseurDto } from 'src/app/models/fournisseur';
@@ -20,10 +21,9 @@ export class MailToFournisseurComponent implements OnInit {
               public fb: FormBuilder,
               public toastr: ToastrService,
               private router : Router,
-              /*
-              @Inject(MAT_DIALOG_DATA)  public data,
-              public dialogRef:MatDialogRef<SendEmailToChauffeurComponent>,
-              */
+              @Inject(MAT_DIALOG_DATA)  public data:any,
+              public dialogRef:MatDialogRef<MailToFournisseurComponent>,
+              
   ) { }
 
   ngOnInit() {
@@ -32,12 +32,19 @@ export class MailToFournisseurComponent implements OnInit {
     };
   }
 
+
   infoForm() {
     this.crudApi.dataForm = this.fb.group({
+      id: [this.crudApi.dataForm.value.id,  [Validators.required]],
+      email: [this.crudApi.dataForm.value.email,  [Validators.required]],
+      subject: [this.crudApi.dataForm.value.subject,  [Validators.required]],
+      message: [this.crudApi.dataForm.value.message,  [Validators.required]],
+/*
       id: null,
       email: ['', [Validators.required]],
       subject: ['', [Validators.required]],
       message: ['', [Validators.required]],
+      */
     });
 
   }
@@ -45,6 +52,7 @@ export class MailToFournisseurComponent implements OnInit {
   onSubmit() {
     this.mailService.sendMailToFournisseur(this.crudApi.dataForm.value).
     subscribe( data => {
+      console.log(data);
       this.toastr.success("Email Envoyé avec Succès");
       this.router.navigate(['/admin/accueil/fournisseurs']);
     });

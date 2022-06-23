@@ -36,7 +36,7 @@
                         <div class="icon">
                             <i class="ion ion-bag"></i>
                         </div>
-                        <a routerLink="/admin/commandes-encours" class="small-box-footer" style="cursor: pointer;">Voir plus <i class="fas fa-arrow-circle-right"></i></a>
+                        <a (click)="goToListOfPendingCommande()" class="small-box-footer" style="cursor: pointer;">Voir plus <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -78,7 +78,7 @@
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
                         </div>
-                        <a href="#" class="small-box-footer">Voir plus<i class="fas fa-arrow-circle-right"></i></a>
+                        <a routerLink="/admin/accueil/utilisateurs/internautes" class="small-box-footer">Voir plus<i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
