@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  apiBaseUrl: 'https://flower-admin.herokuapp.com/flowers/v1'
 };
