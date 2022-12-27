@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Login } from 'src/app/services/auth/login';
 import { TokenStorageService } from 'src/app/services/auth/token-storage.service';
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private authService: AuthService,
               private tokenStorage: TokenStorageService,
-              private router: Router
+              private router: Router,
+              private toastr: ToastrService
   ) {}
 
   ngOnInit() {
@@ -47,9 +49,15 @@ export class LoginComponent implements OnInit {
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getUser().roles;
 
-        this.router.navigateByUrl("admin/accueil/dashboard").then(() => {
+        if(this.tokenStorage.getUser().roles == 'ROLE_USER') {
+          this.toastr.error("Vous navez pas l'accès à cette partie");
+          this.logout();
           window.location.reload();
-        });
+        } else {
+          this.router.navigateByUrl("admin/accueil/dashboard").then(() => {
+          window.location.reload();
+          });
+        }
        
       },
       error => {
@@ -68,6 +76,11 @@ export class LoginComponent implements OnInit {
     this.router.navigateByUrl("admin/accueil", { skipLocationChange: true }).then(() => {
       this.router.navigate(['singIn']);
     });
+  }
+
+  logout(): void {
+    this.tokenStorage.signOut();
+    this.router.navigateByUrl('singIn');
   }
 
 
