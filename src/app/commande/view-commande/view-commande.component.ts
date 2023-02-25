@@ -7,8 +7,11 @@ import { LigneCommandeService } from 'src/app/services/ligne-commande.service';
 
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import "pdfmake/build/pdfmake"
+import { ProductService } from 'src/app/services/product.service';
 const pdfMake = window["pdfMake"];
 pdfMake.vfs = pdfFonts.pdfMake.vfs
+
+import * as moment from 'moment';
 
 //declare var pdfMake: any;
 //pdfMake.vfs = pdfFonts.pdfMake.vfs; 
@@ -27,16 +30,18 @@ export class ViewCommandeComponent implements OnInit {
   totalCommande:any;
   dateCommande:any;
   client:any;
+  telephone_client:any;
+  email_client:any;
+  address_livraison_region:any;
+  address_livraison_ville:any;
+  address_livraison_city:any;
   username: any;
 
   constructor(public crudApi: CommandeService,
               public lcmdService: LigneCommandeService,
+              public productService: ProductService,
               private router : Router,
-              public route: ActivatedRoute,
-            /*  
-              @Inject(MAT_DIALOG_DATA) public data: any,
-              public dialogRef:MatDialogRef<ViewCommandeComponent>,
-              */
+              public route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -48,7 +53,14 @@ export class ViewCommandeComponent implements OnInit {
       this.totalCommande = this.lcmdService.listData[0].commandeDto.totalCommande;
       this.dateCommande = this.lcmdService.listData[0].commandeDto.dateCommande;
       this.client = this.lcmdService.listData[0].commandeDto.clientDto.firstName  + ' ' + this.lcmdService.listData[0].commandeDto.clientDto.lastName;
+      this.telephone_client = this.lcmdService.listData[0].commandeDto.clientDto.mobile;
+      this.telephone_client = this.lcmdService.listData[0].commandeDto.clientDto.mobile;
+      this.email_client = this.lcmdService.listData[0].commandeDto.clientDto.email;
+      this.address_livraison_city = this.lcmdService.listData[0].commandeDto.billingAddressDto.city;
+      this.address_livraison_ville = this.lcmdService.listData[0].commandeDto.billingAddressDto.stateDto.name;
+      this.address_livraison_region = this.lcmdService.listData[0].commandeDto.billingAddressDto.stateDto.countryDto.name;
       this.username = this.lcmdService.listData[0].commandeDto.utilisateurDto.name;
+
       console.log("Username: " +this.username);
     }, err => {
       console.log(err);
@@ -86,7 +98,7 @@ export class ViewCommandeComponent implements OnInit {
     return {
       content: [
         {
-          text: 'FLOWERS MA FLEUR - WOKITE',
+          text: 'FLEURS POUS TOUS - WOKITE',
           fontSize: 15,
           alignment: 'center',
           color: '#0000ff',
@@ -156,7 +168,7 @@ export class ViewCommandeComponent implements OnInit {
 
             [
               {
-                text: `Date : ${this.lcmdService.listData[0].commandeDto.dateCommande.toLocaleString()}`,
+                text:'Date ' + moment(this.lcmdService.listData[0].commandeDto.dateCommande).format("MM-DD-YYYY"), 
                 alignment: 'right',
                 margin: [0, 15, 0, 15]
               },

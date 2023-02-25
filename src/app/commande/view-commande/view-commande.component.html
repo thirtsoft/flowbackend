@@ -16,8 +16,7 @@
     </section>
 
     <section class="content">
-        <div class="container-fluid">
-            <!-- <h4>FACTURES D'UNE COMMANDE</h4> -->
+        <!-- <div class="container-fluid">
             <div>
                 <a (click)="OpenPdf()" style="cursor: pointer;" class="btn btn-warning">
                     <i class="fa fa-folder-open" aria-hidden="true"></i> Ouvrir</a>&nbsp;
@@ -31,29 +30,35 @@
             </div>
             <div class="panel-body" style="margin-top: 10px">
                 <div class="row">
-                    <div class="form-group col-sm-2">
-                        <label>Agent : </label>
-                        <input type="text" class="form-control" name="id" [value]="this.username" readonly />
-                    </div>
+                    <div class="col-sm-6">
 
-                    <div class="form-group col-sm-3">
-                        <label>Commande Numéro : </label>
-                        <input type="text" class="form-control" name="numeroCommande" [value]="this.numeroCommande" id="numeroCommande" readonly />
-                    </div>
 
-                    <div class="form-group col-sm-3">
-                        <label>Client : </label>
-                        <input type="text" class="form-control" name="client" [value]="this.client" id="client" readonly />
-                    </div>
+                        <div class="form-group col-sm-2">
+                            <label>Achéter par : </label>
+                            <input type="text" class="form-control" name="id" [value]="this.username" readonly />
+                        </div>
 
-                    <div class="form-group col-sm-2">
-                        <label>P.Total : </label>
-                        <input type="text" class="form-control" name="" [value]="this.totalCommande" id="total" readonly />
-                    </div>
+                        <div class="form-group col-sm-3">
+                            <label>Commande Numéro : </label>
+                            <input type="text" class="form-control" name="numeroCommande" [value]="this.numeroCommande" id="numeroCommande" readonly />
+                        </div>
 
-                    <div class="form-group col-sm-2">
-                        <label>Date : </label>
-                        <input type="text" name="dateCommande" [value]="this.dateCommande | date: 'dd-MM-yyyy'" class="form-control" readonly />
+                        <div class="form-group col-sm-3">
+                            <label>Client : </label>
+                            <input type="text" class="form-control" name="client" [value]="this.client" id="client" readonly />
+                        </div>
+                        <div class="form-group col-sm-2">
+                            <label>P.Total : </label>
+                            <input type="text" class="form-control" name="" [value]="this.totalCommande" id="total" readonly />
+                        </div>
+
+                        <div class="form-group col-sm-2">
+                            <label>Date : </label>
+                            <input type="text" name="dateCommande" [value]="this.dateCommande | date: 'dd-MM-yyyy'" class="form-control" readonly />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+
                     </div>
                 </div>
                 <div></div>
@@ -70,7 +75,12 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let item of this.lcmdService.listData">
-                            <td>{{ item.productName }}</td>
+                            <td>
+                                <img src="{{
+                                    this.productService.apiServerUrl +
+                                    '/products/photoProductInFolder/' +
+                                    item?.productId
+                                    }}" alt="{{ item.productName }}" style="width: 90px; height: 90px;"> &nbsp; {{ item.productName }}</td>
                             <td>{{ item.quantity }}</td>
                             <td>{{ item.price }}</td>
                             <td>{{ item.price * item.quantity }}</td>
@@ -79,8 +89,99 @@
                 </table>
 
             </div>
+        </div> -->
+        <div class="container-fluid">
+            <div class="col-md-12">
+                <div class="invoice">
+                    <div class="invoice-company text-inverse f-w-600">
+                        <span class="pull-right hidden-print">
+                            <a (click)="OpenPdf()" style="cursor: pointer;" class="btn btn-warning btn-sm">
+                                <i class="fa fa-folder-open" aria-hidden="true"></i> Ouvrir</a>&nbsp;
+            <a (click)="DownloadPdf()" class="btn btn-sm btn-white m-b-10 p-l-5"><i class="fa fa-file t-plus-1 text-danger fa-fw fa-lg"></i> Export as PDF</a> &nbsp;
+            <a (click)="PrintPdf()" class="btn btn-sm btn-white m-b-10 p-l-5"><i class="fa fa-print t-plus-1 fa-fw fa-lg"></i> Print</a> &nbsp;
+            <a type="button" (click)="onGoBack()" class="btn btn-warning btn-sm" style="cursor: pointer;">
+                <span class="fa fa-arrow-left"></span> Retour&nbsp;
+                        </a>
+                        </span>
+                    </div>
+                    <div class="invoice-header">
+                        <div class="invoice-from">
+                            <small> <strong>Facturé à :</strong>  </small>
+                            <address class="m-t-5 m-b-5">
+                  <!-- <strong class="text-inverse"></strong><br> -->
+                  {{this.client}} <br>
+                  Tél: {{this.telephone_client}}<br>
+                  Email:{{this.email_client}}<br>
+               </address>
+                        </div>
+                        <div class="invoice-to">
+                            <small> <strong>Address Livraison :</strong> </small>
+                            <address class="m-t-5 m-b-5">
+                  <!-- <strong class="text-inverse"></strong><br> -->
+                  {{this.address_livraison_city}}<br>
+                  {{this.address_livraison_ville}}<br>
+                  {{this.address_livraison_region}}<br>
+               </address>
+                        </div>
+                        <div class="invoice-date">
+                            <small>Facture / client</small>
+                            <div class="date text-inverse m-t-5">{{this.dateCommande | date: 'dd-MM-yyyy'}}</div>
+                            <div class="invoice-detail">
+                                #{{this.numeroCommande}}<br> Achat effectué par {{this.username}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="invoice-content">
+                        <div class="table-responsive">
+                            <table class="table table-invoice">
+                                <thead>
+                                    <tr>
+                                        <th>DESIGNATION</th>
+                                        <th class="text-center" width="10%">QUANTITE</th>
+                                        <th class="text-center" width="10%">P.UNITAIRE</th>
+                                        <th class="text-right" width="20%">P.TOTAL</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of this.lcmdService.listData">
+                                        <td>
+                                            <img src="{{
+                                                this.productService.apiServerUrl +
+                                                '/products/photoProductInFolder/' +
+                                                item?.productId
+                                                }}" alt="{{ item.productName }}" style="width: 90px; height: 90px;"> &nbsp;
+                                            <span class="text-inverse">{{ item.productName }}</span></td>
+                                        <td class="text-center">{{ item.quantity }}</td>
+                                        <td class="text-center">{{ item.price }}</td>
+                                        <td class="text-right">{{ item.price * item.quantity }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="invoice-price">
+                            <div class="invoice-price-left">
+                                <div class="invoice-price-row">
+                                    <div class="sub-price">
+                                        <small></small>
+                                        <span class="text-inverse"></span>
+                                    </div>
+                                    <div class="sub-price">
+
+                                    </div>
+                                    <div class="sub-price">
+                                        <small></small>
+                                        <span class="text-inverse"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="invoice-price-right">
+                                <small>TOTAL</small> <span class="f-w-600">FCFA {{this.totalCommande}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 </div>
-
-<!--  -->
