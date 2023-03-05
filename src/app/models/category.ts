@@ -1,13 +1,12 @@
 export class Category {
     id: number;
     categoryName: string;
-    designation: string;
-  
+    description: string;
   }
   
   export class CategoryDto {
     id: number;
     categoryName: string;
-    designation: string;
+    description: string;
   }
   
