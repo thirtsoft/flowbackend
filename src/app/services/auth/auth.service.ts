@@ -4,7 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { UtilisateurDto } from 'src/app/models/utilisateur';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../environments/environment';
 import { ProfileInfo, UpdatePasswordInfo, UpdatePasswordUser, UpdateProfilInfo, UpdateUsernameInfo, UpdateUsernameUser } from './profile-info';
 import { Register } from './register';
 import { TokenStorageService } from './token-storage.service';
