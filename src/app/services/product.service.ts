@@ -100,6 +100,6 @@ export class ProductService {
   }
 
   public deleteProductDTO(prodId: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiServerUrl}/products/delete/${prodId}`);
+    return this.http.delete<void>(`${this.apiServerUrl}/products/delete-product/${prodId}`);
   }
 }

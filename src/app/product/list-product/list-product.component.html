@@ -49,14 +49,19 @@
                                 <tr *ngFor="
                         let prodDTO of productDTOList
                             | filter: searchText
-                            | paginate: { itemsPerPage: 20, currentPage: p }
+                            | paginate: { itemsPerPage: 15, currentPage: p }
                         ">
-                                    <td>
-                                        <img height="90" width="90" class="img-circle" alt="" src="{{
+                                    <td [routerLink]="['/admin/accueil/products/detailProduct', prodDTO.id]" style="cursor: pointer">
+                                    <!--     <img height="90" width="90" class="img-circle" alt="" src="{{
                             this.crudApi.apiServerUrl +
                               '/products/photoProductInFolder/' +
                               prodDTO.id
-                          }}" />
+                          }}" /> -->
+                                      <img height="90" width="90" class="img-circle" alt="" src="{{
+                                        this.crudApi.apiServerUrl +
+                                          '/products/photoProduct/' +
+                                          prodDTO.id
+                                      }}" />
                                     </td>
                                     <td>{{ prodDTO?.reference }}</td>
                                     <td>{{ prodDTO?.designation }}</td>

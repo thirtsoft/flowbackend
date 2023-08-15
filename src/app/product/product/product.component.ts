@@ -132,7 +132,7 @@ export class ProductComponent implements OnInit {
     formData.append('product', JSON.stringify(this.formDataProductDTO));
     formData.append('photoProduct', this.currentPhotoFileUpload);
     console.log("FormData--", formData);
-    this.crudApi.addProductDtoWithPhotoInFolder(formData)
+    this.crudApi.addProductDTOWithPhoto(formData)
       .subscribe((response: ProductDto)=> {
         console.log('Response--', response);
         this.toastr.success('avec succès','Product Ajoutée', {
@@ -169,7 +169,7 @@ export class ProductComponent implements OnInit {
   processForm() {
     this.progress = 0;
     this.currentPhotoFileUpload = this.productPhotoFile.item(0)
-    this.crudApi.uploadPhotoOfProductInFolder(this.currentPhotoFileUpload, this.formDataProductDTO.id)
+    this.crudApi.uploadPhotoProductDTO(this.currentPhotoFileUpload, this.formDataProductDTO.id)
       .subscribe((event:any) => {
         if (event.type === HttpEventType.UploadProgress) {
           this.progress = Math.round(100 * event.loaded / event.total);
