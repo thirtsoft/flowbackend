@@ -35,7 +35,7 @@ export class Detail200LAtestCommandeComponent implements OnInit {
         this.ligneCommandeDTOList = response;
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        console.log(error.message);
       }
     );
   }

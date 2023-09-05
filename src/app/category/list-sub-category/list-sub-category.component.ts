@@ -51,7 +51,7 @@ export class ListSubCategoryComponent implements OnInit {
         this.subCategoriesListDTO = response;
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        console.log(error.message);
       }
     );
 
@@ -71,7 +71,7 @@ export class ListSubCategoryComponent implements OnInit {
         this.getListSubCategoriesDTOs();
         },
         (error: HttpErrorResponse) => {
-          alert(error.message);
+          console.log(error.message);
         }
       );
     }

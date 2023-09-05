@@ -52,7 +52,7 @@ export class SubCategoryComponent implements OnInit {
         this.formDataSubCategoryDTO = response;
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        console.log(error.message);
       }
     );
 
@@ -63,7 +63,7 @@ export class SubCategoryComponent implements OnInit {
       (response: CategoryDto[]) => {
         this.listDataCategoriesDTOs = response;
       }, (error: HttpErrorResponse) => {
-        alert(error.message);
+        console.log(error.message);
       }
     )
   }
@@ -80,7 +80,7 @@ export class SubCategoryComponent implements OnInit {
         });
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        console.log(error.message);
       }
     );
   }
@@ -97,7 +97,7 @@ export class SubCategoryComponent implements OnInit {
         });
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        console.log(error.message);
       }
     );
   }

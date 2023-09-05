@@ -9,9 +9,16 @@ import { ProfileInfo, UpdatePasswordInfo, UpdatePasswordUser, UpdateProfilInfo, 
 import { Register } from './register';
 import { TokenStorageService } from './token-storage.service';
 
+const TOKEN_KEY = 'AuthToken';
+const USERNAME_KEY = 'AuthUsername';
+const AUTHORITIES_KEY = 'AuthAuthorities';
+const NAME_KEY = 'AuthName';
+const EMAIL_KEY = 'AuthEmail';
+const USER_KEY = 'auth-user';
+const USER_ID = 'aut-userId';
+
 //const AUTH_API = "http://62.171.128.8:8080/dpshop-backend-0.0.1-SNAPSHOT/shop-mania/v1/";
 
-const TOKEN_KEY = 'AuthToken';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -65,9 +72,32 @@ export class AuthService {
       username: credentials.username,
       password: credentials.password
     };
-    return this.http.post(`${this.apiServerUrl}/auth/authenticated`, loginData, httpOptions);
+    return this.http.post(`${this.apiServerUrl}/auth/authenticated`, loginData);
     this.islogin=true;
   }
+
+  /*
+  attemptAuth(credentials:{ username: any; password: any; }) : Observable<any>{
+    const loginData = {
+      username: credentials.username,
+      password: credentials.password
+    };
+    return this.http.post<any>(
+        `${this.apiServerUrl}/auth/authenticated`, {
+          loginData
+        }, {observe: 'response'}).pipe(
+        map(
+            data => {
+                const token = data.headers.get("Authorization");
+                console.log(data);
+                console.log(loginData);
+                sessionStorage.setItem(USERNAME_KEY, loginData.username);
+                sessionStorage.setItem(TOKEN_KEY, `Bearer ${token}`);
+                return data;
+            }
+        )
+    );
+  }*/ 
 
   public getCurrentUser(){
     return this.http.get(`${this.apiServerUrl}/auth/currentUser`);

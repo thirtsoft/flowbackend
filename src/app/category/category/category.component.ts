@@ -48,7 +48,7 @@ export class CategoryComponent implements OnInit {
         this.formDataCategoryDTO = response;
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        console.log(error.message);
       }
     );
 
@@ -66,7 +66,7 @@ export class CategoryComponent implements OnInit {
         });
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        console.log(error.message);
       }
     );
   }
@@ -83,7 +83,7 @@ export class CategoryComponent implements OnInit {
         });
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        console.log(error.message);
       }
     );
   }

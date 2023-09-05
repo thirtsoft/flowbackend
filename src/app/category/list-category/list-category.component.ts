@@ -51,7 +51,7 @@ export class ListCategoryComponent implements OnInit {
         this.categoriesListDTO = response;
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        console.log(error.message);
       }
     );
 
@@ -71,7 +71,7 @@ export class ListCategoryComponent implements OnInit {
         this.getListCategoriesDTOs();
         },
         (error: HttpErrorResponse) => {
-          alert(error.message);
+          console.log(error.message);
         }
       );
     }
