@@ -51,7 +51,7 @@ export class HistoriqueLoginComponent implements OnInit {
         this.historiqueLoginListDTO = response;
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error("Erreur lors de la récupération de la liste");
       }
     );
 
@@ -67,7 +67,7 @@ export class HistoriqueLoginComponent implements OnInit {
         this.getListHistoriqueLoginsDTOs();
         },
         (error: HttpErrorResponse) => {
-          alert(error.message);
+          this.toastr.error("Erreor lors de la suppression");
         }
       );
     }

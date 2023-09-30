@@ -18,14 +18,9 @@ export class UtilisateurService {
 
   constructor(private http: HttpClient) {
   }
-  /*********************** UtilisateurDTO ********************/
 
-  public getUtilisateurDtos(): Observable<UtilisateurDto[]> {
-    return this.http.get<UtilisateurDto[]>(`${this.apiServerUrl}/utilisateurs/all`);
-  }
-
-  public getAllUtilisateurDtosOrderByIdDesc(): Observable<UtilisateurDto[]> {
-    return this.http.get<UtilisateurDto[]>(`${this.apiServerUrl}/utilisateurs/searchAllUtilisateursOrderByIdDesc`);
+  public getAllActivesUtilisateurDtos(): Observable<UtilisateurDto[]> {
+    return this.http.get<UtilisateurDto[]>(`${this.apiServerUrl}/utilisateurs/search-all-active-utilisateurs`);
   }
 
   public getUtilisateurDtoById(userId: number): Observable<UtilisateurDto> {
@@ -44,7 +39,7 @@ export class UtilisateurService {
     const headers = new HttpHeaders();
     headers.set('Content-Type', 'application/json; charset=utf-8');
     let data = {"isActive":isActive};
-    return this.http.patch(`${this.apiServerUrl}/utilisateurs/activatedUser/`+id+'?isActive='+data.isActive, {headers: headers});
+    return this.http.patch(`${this.apiServerUrl}/utilisateurs/activated-user/`+id+'?isActive='+data.isActive, {headers: headers});
   }
 
   public getUserAvatar(id: number){
@@ -54,7 +49,7 @@ export class UtilisateurService {
   public uploadPhotoUtilisateur(file: File, id: number): Observable<HttpEvent<{}>> {
     let formdata: FormData = new FormData();
     formdata.append('file', file);
-    const req = new HttpRequest('POST', this.apiServerUrl+'/utilisateurs/uploadUserPhoto/' + id, formdata, {
+    const req = new HttpRequest('POST', this.apiServerUrl+'/utilisateurs/upload-userPhoto/' + id, formdata, {
       reportProgress: true,
       responseType: 'text'
     });
@@ -62,6 +57,6 @@ export class UtilisateurService {
   }
 
   public deleteUtilisateurDto(userId: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiServerUrl}/utilisateurs/delete/${userId}`);
+    return this.http.delete<void>(`${this.apiServerUrl}/utilisateurs/delete-utilisateur/${userId}`);
   }
 }

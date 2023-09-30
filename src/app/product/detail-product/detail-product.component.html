@@ -3,12 +3,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Détail Product</h1>
+                    <h1>Détail d'un produit</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a routerLink="/admin/accueil/dashboard">Accueil</a></li>
-                        <li class="breadcrumb-item active">Détail Produit</li>
+                        <li class="breadcrumb-item active">Détail produit</li>
                     </ol>
                 </div>
             </div>
@@ -23,14 +23,7 @@
 
                         <div class="col-sm-4 pull-right">
                             <div class="sticky-top">
-
-                               <!--  <img height="90" width="90" src="{{
-                                this.crudApi.apiServerUrl +
-                                  '/products/photoProductInFolder/' +
-                                  productDTO.id
-                              }}" alt="{{productDTO.designation}}" />
- -->
-                              <img height="90" width="90" alt="{{productDTO.designation}}" src="{{
+                      <img height="90" width="90" alt="{{productDTO.designation}}" src="{{
                                 this.crudApi.apiServerUrl +
                                   '/products/photoProduct/' +
                                   productDTO.id

@@ -3,12 +3,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>SubCatégories</h1>
+                    <h1>Sous-catégorie</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a routerLink="/admin/accueil/dashboard">Accueil</a></li>
-                        <li class="breadcrumb-item active">SubCatégories</li>
+                        <li class="breadcrumb-item active">Sous-catégorie</li>
                     </ol>
                 </div>
             </div>
@@ -19,19 +19,19 @@
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-md-12">
-                    <h2 *ngIf="!paramId">Nouvelle SubCatégorie</h2>
-                    <h2 *ngIf="paramId">Modifié SubCatégorie</h2>
+                    <h2 *ngIf="!paramId">Nouvelle sous-catégorie</h2>
+                    <h2 *ngIf="paramId">Modifié sous-catégorie</h2>
                     <form #addCategoryForm="ngForm">
 
                         <div class="form-group">
 
-                            <label>Designation</label>
+                            <label>Désignation</label>
                             <input type="text" placeholder="Designation" class="form-control" [(ngModel)]="formDataSubCategoryDTO.subCategoryName" name="subCategoryName" id="subCategoryName" #subCategoryName="ngModel" required />
                             <span class="text-danger" *ngIf="
                         (subCategoryName.touched || addCategoryForm.submitted) &&
                         subCategoryName.errors?.['required']
                       ">
-                      subCategoryName est obligatoire
+                      La désignation est obligatoire
                     </span>
 
                         </div>
@@ -45,7 +45,7 @@
                         <option  *ngFor="let subCat of listDataCategoriesDTOs" [ngValue]="subCat.id == formDataSubCategoryDTO.categoryDto?.id ? formDataSubCategoryDTO.categoryDto : subCat">{{subCat.categoryName}}</option>
                       </select>
                             <span class="text-danger" *ngIf="(categoryDto.touched || addCategoryForm.submitted) && categoryDto.errors?.['required']">
-                            categoryDto est obligatoire
+                            la catégorie est obligatoire
                       </span>
 
                         </div>
@@ -59,7 +59,7 @@
                         (description.touched || addCategoryForm.submitted) &&
                         description.errors?.['required']
                       ">
-                      description est obligatoire
+                      La description est obligatoire
                     </span>
 
                         </div>
@@ -74,7 +74,7 @@
                   (click)="onUpdateSubCategory()"
                   style="cursor: pointer;"
                 >
-                  <i class="fa fa-database"></i>Modifié
+                  <i class="fa fa-database"></i>Modifier
                 </button>
                             <button type="button" class="btn btn-danger ml-1" (click)="goBack()" style="cursor: pointer;">
                   <i class="fa fa-close"></i> Fermer

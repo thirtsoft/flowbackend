@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h3>List of Products</h3>
+                    <h3>Gestion des produits</h3>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -25,7 +25,7 @@
 
                 <div class="col-sm-4 col-6 text-right m-b-20">
                     <a (click)="onAddNewProduct()" class="btn btn btn-primary btn-rounded float-right">
-                        <i class="fa fa-plus"></i> Ajouter Produit</a>
+                        <i class="fa fa-plus"></i> Ajouter produit</a>
                 </div>
             </div>
             <div class="row">
@@ -52,11 +52,6 @@
                             | paginate: { itemsPerPage: 15, currentPage: p }
                         ">
                                     <td [routerLink]="['/admin/accueil/products/detailProduct', prodDTO.id]" style="cursor: pointer">
-                                    <!--     <img height="90" width="90" class="img-circle" alt="" src="{{
-                            this.crudApi.apiServerUrl +
-                              '/products/photoProductInFolder/' +
-                              prodDTO.id
-                          }}" /> -->
                                       <img height="90" width="90" class="img-circle" alt="" src="{{
                                         this.crudApi.apiServerUrl +
                                           '/products/photoProduct/' +

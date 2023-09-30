@@ -55,12 +55,12 @@ export class InternauteComponent implements OnInit {
   }
 
   getListRecruteurDTOs(): void {
-    this.crudApi.getAllUtilisateurDtosOrderByIdDesc().subscribe(
+    this.crudApi.getAllActivesUtilisateurDtos().subscribe(
       (response: UtilisateurDto[]) => {
         this.internauteListDTO = response;
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error("Erreur lors de la récupération de la liste des internaute");
       }
     );
   }

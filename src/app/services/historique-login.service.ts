@@ -21,30 +21,12 @@ export class HistoriqueLoginService {
   constructor(private http: HttpClient) {
   }
 
-  /********************* HistoriqueLoginDto ******************/
-
-  public getHistoriqueLoginDtos(): Observable<HistoriqueLoginDto[]> {
-    return this.http.get<HistoriqueLoginDto[]>(`${this.apiServerUrl}/historiqueLogins/all`);
-  }
-
   public getALLHistoriqueLoginDtosOrderByIdDesc(): Observable<HistoriqueLoginDto[]> {
-    return this.http.get<HistoriqueLoginDto[]>(`${this.apiServerUrl}/historiqueLogins/searchAllHistoriqueLoginsOrderByIdDesc`);
-  }
-
-  public getHistoriqueLoginDtoById(logHistoriqueId: number): Observable<HistoriqueLoginDto> {
-    return this.http.get<HistoriqueLoginDto>(`${this.apiServerUrl}/historiqueLogins/findById/${logHistoriqueId}`);
-  }
-
-  public addHistoriqueLoginDto(histLogDto: HistoriqueLoginDto): Observable<HistoriqueLoginDto> {
-    return this.http.post<HistoriqueLoginDto>(`${this.apiServerUrl}/historiqueLogins/create`, histLogDto);
-  }
-
-  public updateHistoriqueLoginDto(histLogDto: number, histLoginDto: HistoriqueLoginDto): Observable<HistoriqueLoginDto> {
-    return this.http.put<HistoriqueLoginDto>(`${this.apiServerUrl}/historiqueLogins/update/${histLogDto}`, histLoginDto);
+    return this.http.get<HistoriqueLoginDto[]>(`${this.apiServerUrl}/historiques/search-all-active-historique-logins`);
   }
 
   public deleteHistoriqueLoginDto(histLogDto: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiServerUrl}/historiqueLogins/delete/${histLogDto}`);
+    return this.http.delete<void>(`${this.apiServerUrl}/historiques/delete-historique-login/${histLogDto}`);
   }
 
 }

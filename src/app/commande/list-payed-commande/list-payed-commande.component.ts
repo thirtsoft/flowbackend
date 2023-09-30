@@ -35,7 +35,7 @@ export class ListPayedCommandeComponent implements OnInit {
         this.commandeDTOList = response;
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error("Erreur lors de la récupération de la liste");
       }
     );
   }

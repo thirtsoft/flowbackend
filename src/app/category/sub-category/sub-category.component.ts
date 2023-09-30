@@ -59,7 +59,7 @@ export class SubCategoryComponent implements OnInit {
   }
 
   getListCategoriesDTOs() {
-    this.catService.getAllCategorieDTOs().subscribe(
+    this.catService.getAllActivesCategoriesDTOs().subscribe(
       (response: CategoryDto[]) => {
         this.listDataCategoriesDTOs = response;
       }, (error: HttpErrorResponse) => {

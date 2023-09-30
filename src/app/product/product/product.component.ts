@@ -53,7 +53,6 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.paramId = this.actRoute.snapshot.paramMap.get('id');
-    console.log('Param--', this.paramId);
     if(this.paramId  && this.paramId  > 0){
       this.getProductDTOById(this.paramId);
     }
@@ -66,27 +65,27 @@ export class ProductComponent implements OnInit {
         this.formDataProductDTO = response;
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        console.log(error.message);
       }
     );
   }
 
   getListSubCategoriesDTOs() {
-    this.subCatService.getAllSubcategorieDTOs().subscribe(
+    this.subCatService.getAllAcvivesSubcategorieDTOs().subscribe(
       (response: SubCategoryDto[]) => {
         this.listSubCategoryData = response;
       }, (error: HttpErrorResponse) => {
-        alert(error.message);
+        console.log(error.message);
       }
     )
   }
 
   getListProductsDTOs() {
-    this.crudApi.getAllProductDTOsByIdDesc().subscribe(
+    this.crudApi.getAllActivesProducts().subscribe(
       (response: ProductDto[]) => {
         this.listProductsData = response;
       }, (error: HttpErrorResponse) => {
-        alert(error.message);
+        console.log(error.message);
       }
     )
   }
@@ -117,11 +116,11 @@ export class ProductComponent implements OnInit {
           positionClass: 'toast-top-right',
         });
         this.router.navigateByUrl("admin/accueil/products/listProducts").then(() => {
-          window.location.reload();
+          this.getListProductsDTOs();
         });
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        console.log(error.message);
       }
     );
   }
@@ -131,7 +130,6 @@ export class ProductComponent implements OnInit {
     this.currentPhotoFileUpload = this.productPhotoFile.item(0);
     formData.append('product', JSON.stringify(this.formDataProductDTO));
     formData.append('photoProduct', this.currentPhotoFileUpload);
-    console.log("FormData--", formData);
     this.crudApi.addProductDTOWithPhoto(formData)
       .subscribe((response: ProductDto)=> {
         console.log('Response--', response);
@@ -141,11 +139,13 @@ export class ProductComponent implements OnInit {
         });
         this.router.navigateByUrl("admin/accueil/products/listProducts").then(() => {
           this.getListProductsDTOs();
-          window.location.reload();
         });
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error('du produit','Erreur lors de l\'ajout', {
+          timeOut: 1500,
+          positionClass: 'toast-top-right',
+        });
       }
     );
   }
@@ -179,7 +179,6 @@ export class ProductComponent implements OnInit {
           });
           this.router.navigateByUrl("admin/accueil/products/listProducts").then(() => {
             this.getListProductsDTOs();
-            window.location.reload();
           });
         } else if (event instanceof HttpResponse) {
           this.editPhoto=false;
@@ -194,7 +193,7 @@ export class ProductComponent implements OnInit {
 
   goBack() {
     this.router.navigateByUrl("admin/accueil/products/listProducts").then(() => {
-      window.location.reload();
+      this.getListProductsDTOs();
     });
   }
 

@@ -48,12 +48,12 @@ export class ListNewsletterComponent implements OnInit {
   }
 
   getListNewslettersDTOs() {
-    this.crudApi.getNewsletterDTOOrderByIdDesc().subscribe(
+    this.crudApi.getAllActivesNewsletterDTOs().subscribe(
       (response: NewsletterDto[]) => {
         this.newsletterListDTO = response;
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error("Erreur lors de la récupération de la liste");
       }
     );
 
@@ -75,16 +75,16 @@ export class ListNewsletterComponent implements OnInit {
   */
 
   onDeleteNewsletter(id: number): void{
-    if (window.confirm('Etes-vous sure de vouloir supprimer cette NewsletterDto ?')) {
+    if (window.confirm('Etes-vous sure de vouloir supprimer cette Newsletter ?')) {
       this.crudApi.deleteNewsletterDTO(id).subscribe(data => {
-        this.toastr.error('avec succès','NewsletterDto supprimée', {
+        this.toastr.error('avec succès','Newsletter supprimée', {
           timeOut: 1500,
           positionClass: 'toast-top-right',
         });
         this.getListNewslettersDTOs();
         },
         (error: HttpErrorResponse) => {
-          alert(error.message);
+          this.toastr.error("Erreur lors de la suppression du newletter");
         }
       );
     }

@@ -102,12 +102,12 @@ export class HeaderComponent implements OnInit {
   }
 
   getListEmailsDTOs() {
-    this.mail.getAllListEmailDTOOrderIdDesc().subscribe(
+    this.mail.getAllActivesEmailDTOs().subscribe(
       (response: EmailDto[]) => {
         this.emailDtoList = response;
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error("Erreur lors de la récupération de la liste des email");
       }
     );
   }

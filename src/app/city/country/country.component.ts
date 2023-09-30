@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { CountryDto } from 'src/app/models/country';
+import { Country, CountryDto } from 'src/app/models/country';
 import { CountryService } from 'src/app/services/country.service';
 
 @Component({
@@ -13,6 +13,7 @@ import { CountryService } from 'src/app/services/country.service';
 export class CountryComponent implements OnInit {
 
   formDataCountryDTO: CountryDto = new CountryDto();
+  countryListDTO?: CountryDto[] = [];
 
   data:any;
   paramId :any = 0;
@@ -47,7 +48,19 @@ export class CountryComponent implements OnInit {
         this.formDataCountryDTO = response;
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error("Erreur lors de la récupération de la région");
+      }
+    );
+
+  }
+
+  getListCountriesDTOs() {
+    this.crudApi.getAllActivesCountriesDTOsc().subscribe(
+      (response: CountryDto[]) => {
+        this.countryListDTO = response;
+      },
+      (error: HttpErrorResponse) => {
+        this.toastr.error("Erreur lors de la récupération de la liste");
       }
     );
 
@@ -61,11 +74,11 @@ export class CountryComponent implements OnInit {
           positionClass: 'toast-top-right',
         });
         this.router.navigateByUrl("admin/accueil/localities/countries").then(() => {
-          window.location.reload();
+          this.getListCountriesDTOs();
         });
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error("Erreur lors de l\'ajout de la région");
       }
     );
   }
@@ -78,11 +91,11 @@ export class CountryComponent implements OnInit {
           positionClass: 'toast-top-right',
         });
         this.router.navigateByUrl("admin/accueil/localities/countries").then(() => {
-          window.location.reload();
+         this.getListCountriesDTOs();
         });
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error("Erreur lors de la modification de la région");
       }
     );
   }

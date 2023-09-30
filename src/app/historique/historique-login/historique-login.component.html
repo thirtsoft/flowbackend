@@ -3,12 +3,11 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <!--  <h1>Historique Logins</h1> -->
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a routerLink="/admin/accueil/dashboard">Accueil</a></li>
-                        <li class="breadcrumb-item active">Historique Logins</li>
+                        <li class="breadcrumb-item active">Historique connections</li>
                     </ol>
                 </div>
             </div>
@@ -19,7 +18,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-4 col-3">
-                    <h4 class="page-title">List of Historique Logins</h4>
+                    <h4 class="page-title">Gestion des historiques de connections</h4>
                 </div>
 
                 <div class="col-sm-4 col-3">
@@ -56,7 +55,7 @@
                                     <td class="text-right">
 
                                         <button class="btn btn-danger btn-sm" (click)="onDeleteHistoriqueLogin(histLogDTO.id)">
-                                        <i class="fa fa-trash" aria-hidden="true"></i></button
+                                        <i class="fa fa-trash" aria-hidden="true"></i>&nbsp;Supprimer</button
                                       >&nbsp;
                                     </td>
             

@@ -30,12 +30,12 @@ export class ListProductComponent implements OnInit {
   }
 
   getListProductDTOs(): void {
-    this.crudApi.getAllProductDTOsByIdDesc().subscribe(
+    this.crudApi.getAllActivesProducts().subscribe(
       (response: ProductDto[]) => {
         this.productDTOList = response;
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        console.log(error.message);
       }
     );
   }

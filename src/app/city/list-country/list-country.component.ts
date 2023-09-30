@@ -48,12 +48,12 @@ export class ListCountryComponent implements OnInit {
   }
 
   getListCountriesDTOs() {
-    this.crudApi.getCountrieDTOOrderByIdDesc().subscribe(
+    this.crudApi.getAllActivesCountriesDTOsc().subscribe(
       (response: CountryDto[]) => {
         this.countryListDTO = response;
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error("Erreur lors de la récupération de la liste");
       }
     );
 
@@ -64,16 +64,16 @@ export class ListCountryComponent implements OnInit {
   }
 
   onDeleteCountry(id: number): void{
-    if (window.confirm('Etes-vous sure de vouloir supprimer cette Country ?')) {
+    if (window.confirm('Etes-vous sure de vouloir supprimer cette région ?')) {
       this.crudApi.deleteCountryDTO(id).subscribe(data => {
-        this.toastr.error('avec succès','Country supprimée', {
+        this.toastr.error('avec succès','Région supprimée', {
           timeOut: 1500,
           positionClass: 'toast-top-right',
         });
         this.getListCountriesDTOs();
         },
         (error: HttpErrorResponse) => {
-          alert(error.message);
+         this.toastr.warning("La région n\'est pas supprimée, veuillez réessayer encore");
         }
       );
     }

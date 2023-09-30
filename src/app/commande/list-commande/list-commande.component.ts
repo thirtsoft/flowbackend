@@ -30,12 +30,12 @@ export class ListCommandeComponent implements OnInit {
   }
 
   getListCommandeDTOs(): void {
-    this.crudApi.getALLCommandeDTOByIdDesc().subscribe(
+    this.crudApi.getALLActivesCommandeDTOs().subscribe(
       (response: CommandeDto[]) => {
         this.commandeDTOList = response;
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error("Erreur lors de la récupération de la liste");
       }
     );
   }

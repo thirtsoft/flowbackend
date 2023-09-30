@@ -21,29 +21,12 @@ export class HistoriqueCommandeService {
   constructor(private http: HttpClient) {
   }
 
-  /********************* HistoriqueCommandeDto ******************/
 
-  public getHistoriqueCommandeDtos(): Observable<HistoriqueCommandeDto[]> {
-    return this.http.get<HistoriqueCommandeDto[]>(`${this.apiServerUrl}/historiqueCommandes/all`);
-  }
-
-  public getALLHistoriqueCommandeDtosOrderByIdDesc(): Observable<HistoriqueCommandeDto[]> {
-    return this.http.get<HistoriqueCommandeDto[]>(`${this.apiServerUrl}/historiqueCommandes/searchAllHistoriqueCommandesOrderByIdDesc`);
-  }
-
-  public getHistoriqueCommandeDtoById(histComId: number): Observable<HistoriqueCommandeDto> {
-    return this.http.get<HistoriqueCommandeDto>(`${this.apiServerUrl}/historiqueCommandes/findById/${histComId}`);
-  }
-
-  public addHistoriqueCommandeDto(histComDto: HistoriqueCommandeDto): Observable<HistoriqueCommandeDto> {
-    return this.http.post<HistoriqueCommandeDto>(`${this.apiServerUrl}/historiqueCommandes/create`, histComDto);
-  }
-
-  public updateHistoriqueCommandeDto(histComId: number, histComDto: HistoriqueCommandeDto): Observable<HistoriqueCommandeDto> {
-    return this.http.put<HistoriqueCommandeDto>(`${this.apiServerUrl}/historiqueCommandes/update/${histComId}`, histComDto);
+  public getALLActivesHistoriqueCommandeDtos(): Observable<HistoriqueCommandeDto[]> {
+    return this.http.get<HistoriqueCommandeDto[]>(`${this.apiServerUrl}/historiques/search-all-active-historique-commandes`);
   }
 
   public deleteHistoriqueCommandeDto(histComId: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiServerUrl}/historiqueCommandes/delete/${histComId}`);
+    return this.http.delete<void>(`${this.apiServerUrl}/historiques/delete-historique-commande/${histComId}`);
   }
 }

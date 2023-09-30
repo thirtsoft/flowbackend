@@ -48,12 +48,12 @@ export class ListEmailComponent implements OnInit {
   }
 
   getListEmailsDTOs() {
-    this.crudApi.getAllListEmailDTOOrderIdDesc().subscribe(
+    this.crudApi.getAllActivesEmailDTOs().subscribe(
       (response: EmailDto[]) => {
         this.emailListDTO = response;
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error("Erreur lors de la récupération de la liste des email");
       }
     );
   }
@@ -80,7 +80,7 @@ export class ListEmailComponent implements OnInit {
         this.getListEmailsDTOs();
         },
         (error: HttpErrorResponse) => {
-          alert(error.message);
+          this.toastr.error("Erreur lors de la suppression de l\'email");
         }
       );
     }

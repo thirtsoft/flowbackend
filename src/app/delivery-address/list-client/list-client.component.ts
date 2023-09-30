@@ -30,12 +30,12 @@ export class ListClientComponent implements OnInit {
   }
 
   getListClientsDTOs(): void {
-    this.crudApi.getClientDTOsOrderByIdDesc().subscribe(
+    this.crudApi.getAllActivesClientDTOs().subscribe(
       (response: ClientDto[]) => {
         this.clientDTOList = response;
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error("Erreur lors de la récupération de la liste des clients");
       }
     );
   }

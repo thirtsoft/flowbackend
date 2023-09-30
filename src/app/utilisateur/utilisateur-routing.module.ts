@@ -6,6 +6,7 @@ import { ProfileUtilisateurComponent } from './profile-utilisateur/profile-utili
 import { UpdatePasswordOfUtilisateurComponent } from './update-password-of-utilisateur/update-password-of-utilisateur.component';
 import { UpdateProfileOfUtilisateurComponent } from './update-profile-of-utilisateur/update-profile-of-utilisateur.component';
 import { UtilisateurComponent } from './utilisateur/utilisateur.component';
+import { ActivatedUtilisateurComponent } from './activated-utilisateur/activated-utilisateur.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,11 @@ const routes: Routes = [
   {
     path: 'profile/:id',
     component: UpdatePasswordOfUtilisateurComponent
+  },
+
+  {
+    path: 'activated-desactivated-profile',
+    component: ActivatedUtilisateurComponent
   },
 
   {

@@ -17,12 +17,9 @@ export class SubCategoryService {
    * SubCategoryDTO
    */
 
-  public getAllSubcategorieDTOs(): Observable<SubCategoryDto[]> {
-    return this.http.get<SubCategoryDto[]>(`${this.apiServerUrl}/subcategories/all`);
-  }
 
-  public getAllSubcategorieDTOsOrderByIdDesc(): Observable<SubCategoryDto[]> {
-    return this.http.get<SubCategoryDto[]>(`${this.apiServerUrl}/subcategories/searchAllSubCategoriesOrderByIdDesc`);
+  public getAllAcvivesSubcategorieDTOs(): Observable<SubCategoryDto[]> {
+    return this.http.get<SubCategoryDto[]>(`${this.apiServerUrl}/subcategories/search-all-active-subcategories`);
   }
 
   public getSubCategoryDTOById(scatId: number): Observable<SubCategoryDto> {
@@ -38,11 +35,11 @@ export class SubCategoryService {
   }
 
   public getSubCategoryDTOByCategoryId(catId: number): Observable<any> {
-    return this.http.get<any>(`${this.apiServerUrl}/subcategories/searchSubcategoryByCategoryId/${catId}`);
+    return this.http.get<any>(`${this.apiServerUrl}/subcategories/search-subcategories-by-categoryId/${catId}`);
   }
 
   public deleteSubCategoryDTO(subCatId: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiServerUrl}/subcategories/delete/${subCatId}`);
+    return this.http.delete<void>(`${this.apiServerUrl}/subcategories/delete-subcategory/${subCatId}`);
   }
 
 }

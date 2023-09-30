@@ -17,12 +17,9 @@ export class CountryService {
    * CountryDTO
    */
 
-  public getCountrieDTOs(): Observable<CountryDto[]> {
-    return this.http.get<CountryDto[]>(`${this.apiServerUrl}/countries/all`);
-  }
 
-  public getCountrieDTOOrderByIdDesc(): Observable<CountryDto[]> {
-    return this.http.get<CountryDto[]>(`${this.apiServerUrl}/countries/searchAllCountriesOderByIdDesc`);
+  public getAllActivesCountriesDTOsc(): Observable<CountryDto[]> {
+    return this.http.get<CountryDto[]>(`${this.apiServerUrl}/countries/search-all-active-countries`);
   }
 
   public getCountryDTOById(countId: number): Observable<CountryDto> {
@@ -38,7 +35,7 @@ export class CountryService {
   }
 
   public deleteCountryDTO(countId: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiServerUrl}/countries/delete/${countId}`);
+    return this.http.delete<void>(`${this.apiServerUrl}/countries/delete-country/${countId}`);
   }
 
 }

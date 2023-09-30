@@ -19,12 +19,8 @@ export class FournisseurService {
   }
   /**************** FournisseurDTO  *******/
 
-  public getFournisseurDTOs(): Observable<FournisseurDto[]> {
-    return this.http.get<FournisseurDto[]>(`${this.apiServerUrl}/fournisseurs/all`);
-  }
-
-  public getFournisseurDTOsOrderByIdDesc(): Observable<FournisseurDto[]> {
-    return this.http.get<FournisseurDto[]>(`${this.apiServerUrl}/fournisseurs/searchAllFournisseurOrderByIdDesc`);
+  public getAllActivesFournisseurDTOs(): Observable<FournisseurDto[]> {
+    return this.http.get<FournisseurDto[]>(`${this.apiServerUrl}/fournisseurs/search-all-active-fournisseurs`);
   }
 
   public getFournisseurDtoById(fournisseurId: number): Observable<FournisseurDto> {
@@ -40,7 +36,7 @@ export class FournisseurService {
   }
 
   public deleteFournisseurDto(fourId: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiServerUrl}/fournisseurs/delete/${fourId}`);
+    return this.http.delete<void>(`${this.apiServerUrl}/fournisseurs/delete-fournisseur/${fourId}`);
   }
 
 }

@@ -36,7 +36,6 @@ export class HistoriqueCommandeComponent implements OnInit {
     if (this.isLoggedIn) {
       const user = this.tokenService.getUser();
       this.roles = user.roles;
-
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       this.showGestionnaireBoard = this.roles.includes("ROLE_GESTIONNAIRE");
       this.showManagerBoard = this.roles.includes('ROLE_MANAGER');
@@ -46,12 +45,12 @@ export class HistoriqueCommandeComponent implements OnInit {
   }
 
   getListHistoriqueCommandesDTOs() {
-    this.crudApi.getALLHistoriqueCommandeDtosOrderByIdDesc().subscribe(
+    this.crudApi.getALLActivesHistoriqueCommandeDtos().subscribe(
       (response: HistoriqueCommandeDto[]) => {
         this.historiqueCommandeListDTO = response;
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error("Erreur lors de la récupération de la liste");
       }
     );
   }
@@ -66,7 +65,7 @@ export class HistoriqueCommandeComponent implements OnInit {
         this.getListHistoriqueCommandesDTOs();
         },
         (error: HttpErrorResponse) => {
-          alert(error.message);
+          this.toastr.error("Erreur lors de la suppression");
         }
       );
     }

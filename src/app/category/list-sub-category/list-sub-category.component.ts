@@ -46,7 +46,7 @@ export class ListSubCategoryComponent implements OnInit {
   }
 
   getListSubCategoriesDTOs() {
-    this.crudApi.getAllSubcategorieDTOsOrderByIdDesc().subscribe(
+    this.crudApi.getAllAcvivesSubcategorieDTOs().subscribe(
       (response: SubCategoryDto[]) => {
         this.subCategoriesListDTO = response;
       },

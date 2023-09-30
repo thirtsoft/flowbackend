@@ -47,7 +47,7 @@ export class UtilisateurComponent implements OnInit {
         this.formDataUtilisateurDTO = response;
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error("Erreur lors de la récupération des informations de l\'utilisateur");
       }
     );
 
@@ -63,7 +63,7 @@ export class UtilisateurComponent implements OnInit {
         this.router.navigate(['/admin/accueil/utilisateurs']);
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.warning("Erreur lors de mise à jour des information de l\'utilisateur");
       }
     );
   }

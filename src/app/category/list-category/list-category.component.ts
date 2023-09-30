@@ -46,7 +46,7 @@ export class ListCategoryComponent implements OnInit {
   }
 
   getListCategoriesDTOs() {
-    this.crudApi.getAllCategorieDTOByIdDesc().subscribe(
+    this.crudApi.getAllActivesCategoriesDTOs().subscribe(
       (response: CategoryDto[]) => {
         this.categoriesListDTO = response;
       },

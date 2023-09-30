@@ -17,12 +17,9 @@ export class CategoryService {
    *      CategoryDTO
    */
 
-  public getAllCategorieDTOs(): Observable<CategoryDto[]> {
-    return this.http.get<CategoryDto[]>(`${this.apiServerUrl}/categories/all`);
-  }
 
-  public getAllCategorieDTOByIdDesc(): Observable<CategoryDto[]> {
-    return this.http.get<CategoryDto[]>(`${this.apiServerUrl}/categories/searchAllCategoriesOrderByIdDesc`);
+  public getAllActivesCategoriesDTOs(): Observable<CategoryDto[]> {
+    return this.http.get<CategoryDto[]>(`${this.apiServerUrl}/categories/search-all-active-categories`);
   }
 
   public getCategoryDTOById(catId: number): Observable<CategoryDto> {
@@ -38,7 +35,7 @@ export class CategoryService {
   }
 
   public deleteCategoryDTO(catId: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiServerUrl}/categories/delete/${catId}`);
+    return this.http.delete<void>(`${this.apiServerUrl}/categories/delete-category/${catId}`);
   }
 
 }

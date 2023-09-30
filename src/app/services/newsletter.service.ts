@@ -18,14 +18,8 @@ export class NewsletterService {
   constructor(private http: HttpClient) {
   }
 
-  /************************ NewsletterDto *******************/
-
-  public getNewsletterDTOs(): Observable<NewsletterDto[]> {
-    return this.http.get<NewsletterDto[]>(`${this.apiServerUrl}/newsletters/all`);
-  }
-
-  public getNewsletterDTOOrderByIdDesc(): Observable<NewsletterDto[]> {
-    return this.http.get<NewsletterDto[]>(`${this.apiServerUrl}/newsletters/searchAllNewslettersOrderByIdDesc`);
+  public getAllActivesNewsletterDTOs(): Observable<NewsletterDto[]> {
+    return this.http.get<NewsletterDto[]>(`${this.apiServerUrl}/newsletters/search-all-active-newsletters`);
   }
 
   public getNewsletterDTOById(newId: number): Observable<NewsletterDto> {
@@ -37,11 +31,11 @@ export class NewsletterService {
   }
 
   public countNumberOfNewsletter(): Observable<NewsletterDto[]> {
-    return this.http.get<NewsletterDto[]>(`${this.apiServerUrl}/newsletters/countNumberOfNewsletter`);
+    return this.http.get<NewsletterDto[]>(`${this.apiServerUrl}/newsletters/count-number-of-newsletter`);
   }
 
   public deleteNewsletterDTO(newId: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiServerUrl}/newsletters/delete/${newId}`);
+    return this.http.delete<void>(`${this.apiServerUrl}/newsletters/delete-newsletter/${newId}`);
   }
 
 }

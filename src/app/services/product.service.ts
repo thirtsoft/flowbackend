@@ -21,17 +21,9 @@ export class ProductService {
     return this.http.get<ProductDto[]>(`${this.apiServerUrl}/products/all`);
   }
 
-  public getAllProductDTOsByIdDesc(): Observable<ProductDto[]> {
-    return this.http.get<ProductDto[]>(`${this.apiServerUrl}/products/searchAllProductOrderByIdDesc`);
+  public getAllActivesProducts(): Observable<ProductDto[]> {
+    return this.http.get<ProductDto[]>(`${this.apiServerUrl}/products/search-all-active-products`);
   } 
-
-  public getTop3ProductDTOsByIdDesc():  Observable<ProductDto[]> {
-    return this.http.get<ProductDto[]>(`${this.apiServerUrl}/products/searchTop3ProductByOrderIdDesc`);
-  }
-
-  public getTop8ProductDTOsByIdDesc():  Observable<ProductDto[]> {
-    return this.http.get<ProductDto[]>(`${this.apiServerUrl}/products/searchTop8ProductByOrderIdDesc`);
-  }
 
   public getProductDTOById(prodId: number): Observable<ProductDto> {
     return this.http.get<ProductDto>(`${this.apiServerUrl}/products/findById/${prodId}`);
@@ -42,7 +34,7 @@ export class ProductService {
   }
 
   public addProductDTOWithPhoto(formData: FormData): Observable<any> {
-    const req = new HttpRequest('POST', `${this.apiServerUrl}/products/createWithFile`, formData, {
+    const req = new HttpRequest('POST', `${this.apiServerUrl}/products/create-with-file`, formData, {
       reportProgress: true,
       responseType: 'text'
     });
@@ -50,7 +42,7 @@ export class ProductService {
   }
 
   public addProductDtoWithPhotoInFolder(formData: FormData): Observable<any> {
-    const req = new HttpRequest('POST', `${this.apiServerUrl}/products/createWithFilesInFolder`, formData, {
+    const req = new HttpRequest('POST', `${this.apiServerUrl}/products/create-with-file-In-folder`, formData, {
       reportProgress: true,
       responseType: 'text'
     });
@@ -71,7 +63,7 @@ export class ProductService {
 
   public uploadPhotoProductDTO(file: File, idProduct: any): Observable<HttpEvent<{}>> {
     let formdata: FormData = new FormData();
-    formdata.append('file', file);
+    formdata.append('photoProduct', file);
     const req = new HttpRequest('POST', `${this.apiServerUrl}/products/uploadProductPhoto/${idProduct}`, formdata, {
       reportProgress: true,
       responseType: 'text'
@@ -102,4 +94,4 @@ export class ProductService {
   public deleteProductDTO(prodId: number): Observable<void> {
     return this.http.delete<void>(`${this.apiServerUrl}/products/delete-product/${prodId}`);
   }
-}
+}               

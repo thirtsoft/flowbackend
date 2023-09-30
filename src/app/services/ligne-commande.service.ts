@@ -16,46 +16,29 @@ export class LigneCommandeService {
   constructor(private http: HttpClient) {
   }
 
-  /*********************** LigneCommandeDTO */
-
-  public getLigneCommandeDtos(): Observable<LigneCommandeDto[]> {
-    return this.http.get<LigneCommandeDto[]>(`${this.apiServerUrl}/orderItems/all`);
-  }
 
   public getAllOrderITemsDtosOrderByIdDesc(): Observable<LigneCommandeDto[]> {
-    return this.http.get<LigneCommandeDto[]>(`${this.apiServerUrl}/orderItems/searchAllOrderItemOrderByIdDesc`);
+    return this.http.get<LigneCommandeDto[]>(`${this.apiServerUrl}/orderItems/search-all-active-orderItems`);
   }
 
   public getLigneCommandeDtosOrderByIdDesc(): Observable<LigneCommandeDto[]> {
-    return this.http.get<LigneCommandeDto[]>(`${this.apiServerUrl}/orderItems/findAllOrderItemsGroupByIdDesc`);
+    return this.http.get<LigneCommandeDto[]>(`${this.apiServerUrl}/orderItems/find-all-orderItems-group-by-IdDesc`);
   }
 
   public getTop8OrderItemsOrderByIdDesc(): Observable<LigneCommandeDto[]> {
-    return this.http.get<LigneCommandeDto[]>(`${this.apiServerUrl}/orderItems/searchTop8OrderItemsOrderByIdDesc`);
+    return this.http.get<LigneCommandeDto[]>(`${this.apiServerUrl}/orderItems/search-top8-orderItems-order-by-IdDesc`);
   }
 
   public getTop3OrderItemsOrderByIdDesc(): Observable<LigneCommandeDto[]> {
-    return this.http.get<LigneCommandeDto[]>(`${this.apiServerUrl}/orderItems/searchTop3OrderItemsOrderByIdDesc`);
+    return this.http.get<LigneCommandeDto[]>(`${this.apiServerUrl}/orderItems/search-top3-orderItems-order-by-IdDesc`);
   }
 
   public getLigneCommandeDtosByCommandeId(lcomId: number): Observable<LigneCommandeDto[]> {
-    return this.http.get<LigneCommandeDto[]>(`${this.apiServerUrl}/orderItems/searchAllOrderItemsByOrderId/${lcomId}`);
+    return this.http.get<LigneCommandeDto[]>(`${this.apiServerUrl}/orderItems/search-all-orderItems-by-orderId/${lcomId}`);
   }
 
   public getLigneCommandeDtoById(lcomId: number): Observable<LigneCommandeDto> {
     return this.http.get<LigneCommandeDto>(`${this.apiServerUrl}/orderItems/findById/${lcomId}`);
-  }
-
-  public addLigneCommandeDto(lComDTO: LigneCommandeDto): Observable<LigneCommandeDto> {
-    return this.http.post<LigneCommandeDto>(`${this.apiServerUrl}/orderItems/create`, lComDTO);
-  }
-
-  public updateLigneCommandeDto(lcomId: number, lComDTO: LigneCommandeDto): Observable<LigneCommandeDto> {
-    return this.http.put<LigneCommandeDto>(`${this.apiServerUrl}/orderItems/update/${lcomId}`, lComDTO);
-  }
-
-  public deleteLigneCommandeDto(lcomId: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiServerUrl}/orderItems/delete/${lcomId}`);
   }
 
 }

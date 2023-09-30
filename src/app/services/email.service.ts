@@ -21,12 +21,8 @@ export class EmailService {
 
   constructor(private http: HttpClient) { }
 
-  public getAllListEmailDTOs(): Observable<EmailDto[]> {
-    return this.http.get<EmailDto[]>(`${this.baseUrl}/emails/all`);
-  }
-
-  public getAllListEmailDTOOrderIdDesc(): Observable<EmailDto[]> {
-    return this.http.get<EmailDto[]>(`${this.baseUrl}/emails/searchAllEmailsOrderByIdDesc`);
+  public getAllActivesEmailDTOs(): Observable<EmailDto[]> {
+    return this.http.get<EmailDto[]>(`${this.baseUrl}/emails/search-all-active-emails`);
   }
 
   public getEmailById(id: number): Observable<EmailDto> {
@@ -38,26 +34,26 @@ export class EmailService {
   }
 
   public sendEmailDTOToManager(info: EmailDto): Observable<EmailDto> {
-    return this.http.post<EmailDto>(`${this.baseUrl}/emails/sendMailToManager`, info);
+    return this.http.post<EmailDto>(`${this.baseUrl}/emails/send-mail-to-manager`, info);
   }
 
   public sendMailDTOToAllCustomer(info: NewsletterDto): Observable<NewsletterDto> {
-    return this.http.post<NewsletterDto>(`${this.baseUrl}/emails/sendMailToAllCustomers`, info);
+    return this.http.post<NewsletterDto>(`${this.baseUrl}/emails/send-mail-to-all-customers`, info);
   }
 
   public sendEmailToCustomer(mail: NewsletterDto): Observable<NewsletterDto> {
-    return this.http.post<NewsletterDto>(`${this.baseUrl}/emails/sendToNewsletter`, mail);
+    return this.http.post<NewsletterDto>(`${this.baseUrl}/emails/send-to-newsletter`, mail);
   }
 
   public sendMailToFournisseur(info: EmailDto): Observable<EmailDto> {
-    return this.http.post<EmailDto>(`${this.baseUrl}/emails/sendToFournisseur`, info);
+    return this.http.post<EmailDto>(`${this.baseUrl}/emails/send-to-fournisseur`, info);
   }
 
   public countNumberOfEmail(): Observable<EmailDto> {
-    return this.http.get<EmailDto>(`${this.baseUrl}/emails/countNumberOfEmail`);
+    return this.http.get<EmailDto>(`${this.baseUrl}/emails/count-number-of-email`);
   }
 
   public deleteEmail(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/emails/delete/${id}`);
+    return this.http.delete<void>(`${this.baseUrl}/emails/delete-email/${id}`);
   }
 }

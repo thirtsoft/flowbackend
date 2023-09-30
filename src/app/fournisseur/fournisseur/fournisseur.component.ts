@@ -57,28 +57,28 @@ export class FournisseurComponent implements OnInit {
         this.formDataFournisseurDTO = response;
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error("Erreur lors de la récupération de la liste du fournisseur");
       }
     );
 
   }
 
   getListProductsDTOs() {
-    this.prodService.getALLProductDTOs().subscribe(
+    this.prodService.getAllActivesProducts().subscribe(
       (response: ProductDto[]) => {
         this.listDataProductsDTOs = response;
       }, (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error("Erreur lors de la récupération de la liste des produits");
       }
     )
   }
 
   getListStatesDTOs() {
-    this.statService.getAllStateDTOs().subscribe(
+    this.statService.getAllActivesStatesDTOs().subscribe(
       (response: StateDto[]) => {
         this.listDataStatesDTOs = response;
       }, (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error("Erreur lors de la récupération de la liste des département");
       }
     )
   }
@@ -95,7 +95,7 @@ export class FournisseurComponent implements OnInit {
         });
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error("Erreur lors de l\'ajout du fournisseur");
       }
     );
   }
@@ -112,7 +112,7 @@ export class FournisseurComponent implements OnInit {
         });
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error("Erreur lors de la modification du fournisseur");
       }
     );
   }
@@ -120,6 +120,5 @@ export class FournisseurComponent implements OnInit {
   goBack() {
     this.router.navigateByUrl("admin/accueil/fournisseurs/listFournisseurs");
   }
-
 
 }

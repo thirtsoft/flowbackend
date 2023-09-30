@@ -28,13 +28,13 @@ export class ActivatedUtilisateurComponent implements OnInit {
 
   infoForm() {
     this.crudApi.formData = this.fb.group({
-      id: null,
-      active: ['', [Validators.required]],
+      id: [this.crudApi.formData.value.id, Validators.required],
+      active: [this.crudApi.formData.value.active, Validators.required],
     });
   }
 
   getListUtilisateur() {
-    this.crudApi.getAllUtilisateurDtosOrderByIdDesc()
+    this.crudApi.getAllActivesUtilisateurDtos()
     .subscribe(
       response =>{
         this.listData = response;
@@ -47,12 +47,17 @@ export class ActivatedUtilisateurComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.crudApi.formData.value);
-    console.log(this.crudApi.formData.value.active);
     this.crudApi.activatedUser(this.crudApi.formData.value.id,this.crudApi.formData.value.active)
     .subscribe(data => {
       this.toastr.success("Compte Activé/Désactivé avec Succès");
+    this.router.navigateByUrl('admin/accueil/utilisateurs/listUtilisateurs').then(() => {
+        this.getListUtilisateur();
+       });
     });
+  }
+
+  goBack() {
+    this.router.navigateByUrl('admin/accueil/utilisateurs/listUtilisateurs');
   }
 
 

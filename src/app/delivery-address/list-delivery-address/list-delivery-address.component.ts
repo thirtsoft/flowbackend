@@ -30,12 +30,12 @@ export class ListDeliveryAddressComponent implements OnInit {
   }
 
   getListAddressDTOs(): void {
-    this.crudApi.getALLAddressDTOByIdDesc().subscribe(
+    this.crudApi.getALLActivesAddressDTOs().subscribe(
       (response: AddressDto[]) => {
         this.addressDTOList = response;
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error("Error lors de la récupération de la liste");
       }
     );
   }

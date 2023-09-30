@@ -28,12 +28,12 @@ export class ListRatingToProductComponent implements OnInit {
   }
 
   getListRatingsDTOs(): void {
-    this.crudApi.getAllRatingDtosOrderByIdDesc().subscribe(
+    this.crudApi.getAllActivesRatingDtos().subscribe(
       (response: RatingDto[]) => {
         this.ratingDTOList = response;
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error("Erreur lors de la récupération de la liste");
       }
     );
   }

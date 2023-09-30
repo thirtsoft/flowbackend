@@ -40,7 +40,7 @@ export class ListPendingCommandeComponent implements OnInit {
         this.commandeDTOList = response;
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error("Ereur lors de la récupération de la liste");
       }
     );
   }

@@ -17,12 +17,8 @@ export class StateService {
    * StateDTO
    */
 
-  public getAllStateDTOs(): Observable<StateDto[]> {
-    return this.http.get<StateDto[]>(`${this.apiServerUrl}/states/all`);
-  }
-
-  public getAllStateDTOsOrderByIdDesc(): Observable<StateDto[]> {
-    return this.http.get<StateDto[]>(`${this.apiServerUrl}/states/searchAllStatesOrderByIdDesc`);
+  public getAllActivesStatesDTOs(): Observable<StateDto[]> {
+    return this.http.get<StateDto[]>(`${this.apiServerUrl}/states/search-all-active-states`);
   }
 
   public getStateDtoById(statId: number): Observable<StateDto> {
@@ -38,21 +34,21 @@ export class StateService {
   }
 
   public getListStateDTOByCountryCode(code: string): Observable<StateDto[]> {
-    return this.http.get<StateDto[]>(`${this.apiServerUrl}/states/searchStateByCountryCode?code=`+code);
+    return this.http.get<StateDto[]>(`${this.apiServerUrl}/states/search-state-by-country-code?code=`+code);
   }
 
   public getStateDTOByCountryCode(theCountryCode: string): Observable<any> {
-    const searchStateUrl = `${this.apiServerUrl}/states/searchStateByCountryCode?code=${theCountryCode}`;
+    const searchStateUrl = `${this.apiServerUrl}/states/search-state-by-country-code?code=${theCountryCode}`;
     return this.http.get(searchStateUrl);
   }
 
   public getStates(theCountryCode: string): Observable<any> {
-    const searchStateUrl = `${this.apiServerUrl}/states/searchStateByCountryCode?code=${theCountryCode}`;
+    const searchStateUrl = `${this.apiServerUrl}/states/search-state-by-country-code?code=${theCountryCode}`;
     return this.http.get(searchStateUrl);
   }
 
   public deleteStateDTO(StateId: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiServerUrl}/states/delete/${StateId}`);
+    return this.http.delete<void>(`${this.apiServerUrl}/states/delete-state/${StateId}`);
   }
 
 }

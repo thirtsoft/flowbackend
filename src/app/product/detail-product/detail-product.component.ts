@@ -46,7 +46,7 @@ export class DetailProductComponent implements OnInit {
   }
 
   getListSubCategoriesDTO() {
-    this.subCatService.getAllSubcategorieDTOs().subscribe(
+    this.subCatService.getAllAcvivesSubcategorieDTOs().subscribe(
       (response: SubCategoryDto[]) => {
         this.listSubCategoryDTO = response;
       },

@@ -21,74 +21,74 @@ export class DashboardService {
   ) {}
 
   public getTop200LigneCommandeOrderByIdDesc(): Observable<LigneCommandeDto[]> {
-    return this.http.get<LigneCommandeDto[]>(`${this.apiServerUrl}/orderItems/searchTop200OrderItemsOrderByIdDesc`);
+    return this.http.get<LigneCommandeDto[]>(`${this.apiServerUrl}/orderItems/search-top200-orderItems-order-by-IdDesc`);
   }
 
   public countNumberOfCommande(): Observable<CommandeDto[]> {
-    return this.http.get<CommandeDto[]>(`${this.apiServerUrl}/orders/countNumberOfOrder`);
+    return this.http.get<CommandeDto[]>(`${this.apiServerUrl}/orders/count-number-of-order`);
   }
 
   public countNumberOfOrdersInMonth(): Observable<CommandeDto[]> {
-    return this.http.get<CommandeDto[]>(`${this.apiServerUrl}/orders/countNumberOfOrdersInMonth`);
+    return this.http.get<CommandeDto[]>(`${this.apiServerUrl}/orders/count-number-of-orders-in-month`);
   }
 
   public countNumberOfOrdersByStatusPending(): Observable<CommandeDto[]> {
-    return this.http.get<CommandeDto[]>(`${this.apiServerUrl}/orders/countNumberOfOrdersByPendingStatus`);
+    return this.http.get<CommandeDto[]>(`${this.apiServerUrl}/orders/count-number-of-orders-by-pending-status`);
   }
 
   public countNumberOfCommandeByDay(): Observable<CommandeDto[]> {
-    return this.http.get<CommandeDto[]>(`${this.apiServerUrl}/orders/numberOfCommandeByDay`);
+    return this.http.get<CommandeDto[]>(`${this.apiServerUrl}/orders/number-of-order-by-day`);
   }
 
   public countNumberOfCommandeByMonth(): Observable<CommandeDto[]> {
-    return this.http.get<CommandeDto[]>(`${this.apiServerUrl}/orders/numberOfOrderByMonth`);
+    return this.http.get<CommandeDto[]>(`${this.apiServerUrl}/orders/number-of-order-by-month`);
   }
 
   public sumTotaleOfCommandeInDay(): Observable<CommandeDto[]> {
-    return this.http.get<CommandeDto[]>(`${this.apiServerUrl}/orders/sumTotalOfOrderByDay`);
+    return this.http.get<CommandeDto[]>(`${this.apiServerUrl}/orders/sum-total-of-order-by-day`);
   }
 
   public sumTotaleOfCommandeInMonth(): Observable<CommandeDto[]> {
-    return this.http.get<CommandeDto[]>(`${this.apiServerUrl}/orders/sumTotalOfOrderByMonth`);
+    return this.http.get<CommandeDto[]>(`${this.apiServerUrl}/orders/sum-total-of-order-by-month`);
   }
 
   public sumTotaleOfCommandeInYear(): Observable<CommandeDto[]> {
-    return this.http.get<CommandeDto[]>(`${this.apiServerUrl}/orders/sumTotalOfOrderByYear`);
+    return this.http.get<CommandeDto[]>(`${this.apiServerUrl}/orders/sum-total-of-order-by-year`);
   }
 
   public SumTotaleOfCommandeByMonth(): Observable<CommandeDto[]> {
-    return this.http.get<CommandeDto[]>(`${this.apiServerUrl}/orders/sumTotaleOfOrderByMonthByList`);
+    return this.http.get<CommandeDto[]>(`${this.apiServerUrl}/orders/sum-total-of-order-by-month-by-list`);
   }
 
   public SumTotaleOfOrdersByYear(): Observable<CommandeDto[]> {
-    return this.http.get<CommandeDto[]>(`${this.apiServerUrl}/orders/sumTotaleOfOrderByYearList`);
+    return this.http.get<CommandeDto[]>(`${this.apiServerUrl}/orders/sum-total-of-order-by-year-list`);
   }
 
   public countNumberOfClient(): Observable<ClientDto[]> {
-    return this.http.get<ClientDto[]>(`${this.apiServerUrl}/clients/countNumberOfClient`);
+    return this.http.get<ClientDto[]>(`${this.apiServerUrl}/clients/count-number-of-client`);
   } 
 
   public countNumberOfRegistersInMonth(): Observable<any> {
-    return this.http.get<any[]>(`${this.apiServerUrl}/utilisateurs/countNumberOfRegisterInMonth`);
+    return this.http.get<any[]>(`${this.apiServerUrl}/utilisateurs/count-number-of-register-in-month`);
   }
 
   public countNumberOfRegistersPeerMonth(): Observable<UtilisateurDto[]> {
-    return this.http.get<UtilisateurDto[]>(`${this.apiServerUrl}/utilisateurs/countNumberOfRegisterPeerMonth`);
+    return this.http.get<UtilisateurDto[]>(`${this.apiServerUrl}/utilisateurs/count-number-of-register-peer-month`);
   }
 
   public countNumberOfFournisseurs(): Observable<any> {
-    return this.http.get<any>(`${this.apiServerUrl}/fournisseurs/countNumberOfFournisseur`);
+    return this.http.get<any>(`${this.apiServerUrl}/fournisseurs/count-number-of-fournisseur`);
   }
 
   public countNumberOfRating(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiServerUrl}/ratings/countNumberOfRating`);
+    return this.http.get<any[]>(`${this.apiServerUrl}/ratings/count-number-of-rating`);
   }
 
   public countNumberOfRatingByProductId(noteId: string): Observable<any> {
-    return this.http.get<any>(`${this.apiServerUrl}/ratings/countNumberOfRatingByProductId/${noteId}`);
+    return this.http.get<any>(`${this.apiServerUrl}/ratings/count-number-of-rating-by-productId/${noteId}`);
   }
 
   public countNumberOfEmailRequest(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiServerUrl}/emails/countNumberOfEmail`);
+    return this.http.get<any[]>(`${this.apiServerUrl}/emails/count-number-of-email`);
   }
 }

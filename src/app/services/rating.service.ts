@@ -23,26 +23,12 @@ export class RatingService {
         {     
   }
 
-/***************************** RatingDTO ******************************************/
-
-  public getRatingDtos(): Observable<RatingDto[]> {
-    return this.http.get<RatingDto[]>(`${this.apiServerUrl}/ratings/all`);
-  }
-
-  public getAllRatingDtosOrderByIdDesc(): Observable<RatingDto[]> {
-    return this.http.get<RatingDto[]>(`${this.apiServerUrl}/ratings/searchAllRatingsOrderByIdDesc`);
-  }
-
-  public getTop3RatingOrderByCreatedDateDesc(): Observable<RatingDto[]> {
-    return this.http.get<RatingDto[]>(`${this.apiServerUrl}/ratings/searchTop3RatingOrderByCreatedDateDesc`);
+  public getAllActivesRatingDtos(): Observable<RatingDto[]> {
+    return this.http.get<RatingDto[]>(`${this.apiServerUrl}/ratings/search-all-active-ratings`);
   }
 
   public getTop4RatingOrderByCreatedDateDescByProduct(prodId: string): Observable<RatingDto[]> {
-    return this.http.get<RatingDto[]>(`${this.apiServerUrl}/ratings/searchTop4RatingOrderByCreatedDateDescByProductId/${prodId}`);
-  }
-
-  public getRatingDtoById(ratId: number): Observable<RatingDto> {
-    return this.http.get<RatingDto>(`${this.apiServerUrl}/ratings/findById/${ratId}`);
+    return this.http.get<RatingDto[]>(`${this.apiServerUrl}/ratings/search-top4-rating-order-by-createdDateDesc-by-productId/${prodId}`);
   }
 
   public addRatingDto(ratDTO: RatingDto): Observable<RatingDto> {
@@ -50,23 +36,19 @@ export class RatingService {
   }
 
   public addRatingToArticle(ratDTO: RatingDto, reference: string, userId:number): Observable<RatingDto> {
-    return this.http.post<RatingDto>(`${this.apiServerUrl}/ratings/createRatingToArticleWithUser?reference=${reference}&userId=${userId}`, ratDTO);
-  }
-
-  public updateRatingDto(ratId: number, ratDTO: RatingDto): Observable<RatingDto> {
-    return this.http.put<RatingDto>(`${this.apiServerUrl}/ratings/update/${ratId}`, ratDTO);
+    return this.http.post<RatingDto>(`${this.apiServerUrl}/ratings/create-rating-to-article-with-use?reference=${reference}&userId=${userId}`, ratDTO);
   }
 
   public countNumberOfRatingDto(): Observable<RatingDto[]> {
-    return this.http.get<RatingDto[]>(`${this.apiServerUrl}/ratings/countNumberOfRating`);
+    return this.http.get<RatingDto[]>(`${this.apiServerUrl}/ratings/count-number-of-rating`);
   }
 
   public countNumberOfRatingDtoByProductId(noteId: string): Observable<RatingDto> {
-    return this.http.get<RatingDto>(`${this.apiServerUrl}/ratings/countNumberOfRatingByProductId/${noteId}`);
+    return this.http.get<RatingDto>(`${this.apiServerUrl}/ratings/count-number-of-rating-by-productId/${noteId}`);
   }
 
   public deleteRatingDto(ratId: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiServerUrl}/ratings/delete/${ratId}`);
+    return this.http.delete<void>(`${this.apiServerUrl}/ratings/delete-rating/${ratId}`);
   }
 
   public getUserId() {

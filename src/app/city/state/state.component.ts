@@ -16,6 +16,7 @@ export class StateComponent implements OnInit {
 
   formDataStateDTO: StateDto = new StateDto();
   listDataCountriesDTOs!: CountryDto[];
+  stateListDTO?: StateDto[] = [];
 
   data: any;
   paramId :any = 0;
@@ -53,18 +54,29 @@ export class StateComponent implements OnInit {
         this.formDataStateDTO = response;
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error("Erreur lors de la récupération du département")
+      }
+    );
+  }
+
+  getListStatesDTOs() {
+    this.crudApi.getAllActivesStatesDTOs().subscribe(
+      (response: StateDto[]) => {
+        this.stateListDTO = response;
+      },
+      (error: HttpErrorResponse) => {
+        this.toastr.error("Error lors de la récupération de la liste");
       }
     );
 
   }
 
   getListCountriesDTOs() {
-    this.countService.getCountrieDTOs().subscribe(
+    this.countService.getAllActivesCountriesDTOsc().subscribe(
       (response: CountryDto[]) => {
         this.listDataCountriesDTOs = response;
       }, (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error("Erreur lors de la récupération de la list de régions");
       }
     )
   }
@@ -77,11 +89,11 @@ export class StateComponent implements OnInit {
           positionClass: 'toast-top-right',
         });
         this.router.navigateByUrl("admin/accueil/localities/states").then(() => {
-          window.location.reload();
+          this.getListStatesDTOs();
         });
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error("Erreur lors de l\'ajout du département");
       }
     );
   }
@@ -94,11 +106,11 @@ export class StateComponent implements OnInit {
           positionClass: 'toast-top-right',
         });
         this.router.navigateByUrl("admin/accueil/localities/states").then(() => {
-          window.location.reload();
+         this.getListStatesDTOs();
         });
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error("Erreur lors de la modification du département");
       }
     );
   }

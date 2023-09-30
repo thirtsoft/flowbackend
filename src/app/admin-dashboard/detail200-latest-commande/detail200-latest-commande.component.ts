@@ -35,7 +35,7 @@ export class Detail200LAtestCommandeComponent implements OnInit {
         this.ligneCommandeDTOList = response;
       },
       (error: HttpErrorResponse) => {
-        console.log(error.message);
+        this.toastr.error("Erreur lors de la récupération de la liste");
       }
     );
   }

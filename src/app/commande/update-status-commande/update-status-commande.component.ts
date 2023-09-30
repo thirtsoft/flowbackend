@@ -39,7 +39,7 @@ export class UpdateStatusCommandeComponent implements OnInit {
   }
 
   getListCommandeDTOs() {
-    this.crudApi.getALLCommandeDTOs().subscribe(
+    this.crudApi.getALLActivesCommandeDTOs().subscribe(
       response =>{this.commandeDTOList = response;}
     );
   }
@@ -56,7 +56,7 @@ export class UpdateStatusCommandeComponent implements OnInit {
         positionClass: 'toast-top-right',
       });
       this.router.navigateByUrl("admin/accueil/commandes").then(() => {
-        window.location.reload();
+       this.getListCommandeDTOs();
       });
     });
   }

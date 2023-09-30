@@ -13,9 +13,6 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs
 
 import * as moment from 'moment';
 
-//declare var pdfMake: any;
-//pdfMake.vfs = pdfFonts.pdfMake.vfs; 
-
 
 @Component({
   selector: 'app-view-commande',
@@ -69,7 +66,7 @@ export class ViewCommandeComponent implements OnInit {
   }
 
   getListCommandeClients() {
-    this.crudApi.getALLCommandeDTOs()
+    this.crudApi.getALLActivesCommandeDTOs()
     .subscribe(
       response =>{
         this.listCommandeData = response;
@@ -90,9 +87,8 @@ export class ViewCommandeComponent implements OnInit {
 
   DownloadPdf() {
     const document : any = this.getDocument();
-    pdfMake.createPdf(document).download();
-  }
-  
+    pdfMake.createPdf(document).download('"FACTURE_"'+this.lcmdService.listData[0].commandeDto.numeroCommande+'.pdf');
+  }  
 
   getDocument() {
     return {

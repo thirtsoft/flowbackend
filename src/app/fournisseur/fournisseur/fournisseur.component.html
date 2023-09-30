@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Fournisseurs</h1>
+                    <h1>Fournisseur</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -19,8 +19,8 @@
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-md-12">
-                    <h2 *ngIf="!paramId">Nouveau Fournisseur</h2>
-                    <h2 *ngIf="paramId">Modifié Fournisseur</h2>
+                    <h2 *ngIf="!paramId">Nouveau fournisseur</h2>
+                    <h2 *ngIf="paramId">Modifié fournisseur</h2>
                     <form #addFournisseurForm="ngForm">
 
                         <div class="form-group">
@@ -72,13 +72,7 @@
 
                             <div class="form-group col-sm-6">
                                 <label>Email</label>
-                                <input type="email" placeholder="example@gmail.com" class="form-control" [(ngModel)]="formDataFournisseurDTO.email" name="email" id="email" #email="ngModel" required />
-                                <span class="text-danger" *ngIf="
-                      (email.touched || addFournisseurForm.submitted) &&
-                      email.errors?.['required']
-                    ">
-                    email est obligatoire
-                  </span>
+                                <input type="email" placeholder="example@gmail.com" class="form-control" [(ngModel)]="formDataFournisseurDTO.email" name="email" id="email" #email="ngModel" />
                             </div>
 
                         </div>
@@ -108,7 +102,7 @@
                           <option  *ngFor="let stateDTO of listDataStatesDTOs" [ngValue]="stateDTO.id == formDataFournisseurDTO.stateDto?.id ? formDataFournisseurDTO.stateDto : stateDTO">{{stateDTO.name}}</option>
                         </select>
                                 <span class="text-danger" *ngIf="(stateDto.touched || addFournisseurForm.submitted) && stateDto.errors?.['required']">
-                              stateDto est obligatoire
+                              adresse est obligatoire
                         </span>
 
                             </div>
@@ -125,10 +119,10 @@
                   (click)="onUpdateFournisseur()"
                   style="cursor: pointer;"
                 >
-                  <i class="fa fa-database"></i>Modifié
+                  <i class="fa fa-database"></i>Modifier
                 </button>
                             <button type="button" class="btn btn-danger ml-1" (click)="goBack()" style="cursor: pointer;">
-                  <i class="fa fa-close"></i> Fermer
+                  <i class="fa fa-close"></i> Retour
                 </button>
                         </div>
 

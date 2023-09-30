@@ -48,12 +48,12 @@ export class ListFournisseurComponent implements OnInit {
   }
 
   getListFournisseursDTOs() {
-    this.crudApi.getFournisseurDTOsOrderByIdDesc().subscribe(
+    this.crudApi.getAllActivesFournisseurDTOs().subscribe(
       (response: FournisseurDto[]) => {
         this.fournisseurListDTO = response;
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        console.log(error.message);
       }
     );
 
@@ -93,7 +93,7 @@ export class ListFournisseurComponent implements OnInit {
         this.getListFournisseursDTOs();
         },
         (error: HttpErrorResponse) => {
-          alert(error.message);
+          console.log(error.message);
         }
       );
     }

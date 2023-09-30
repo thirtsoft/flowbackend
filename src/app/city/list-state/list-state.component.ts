@@ -48,12 +48,12 @@ export class ListStateComponent implements OnInit {
   }
 
   getListStatesDTOs() {
-    this.crudApi.getAllStateDTOsOrderByIdDesc().subscribe(
+    this.crudApi.getAllActivesStatesDTOs().subscribe(
       (response: StateDto[]) => {
         this.stateListDTO = response;
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error("Error lors de la récupération de la liste");
       }
     );
 
@@ -73,7 +73,7 @@ export class ListStateComponent implements OnInit {
         this.getListStatesDTOs();
         },
         (error: HttpErrorResponse) => {
-          alert(error.message);
+          this.toastr.error("Le département n\'est pas supprimé");
         }
       );
     }
