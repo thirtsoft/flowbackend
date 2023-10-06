@@ -32,6 +32,7 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
+                                    <th>Type adresse</th>
                                     <th>Rue</th>
                                     <th>Quartier</th>
                                     <th>Département</th>
@@ -48,6 +49,7 @@
                             ">
 
 
+                            <td>{{addDTO?.sBillingAddress == 1 ? 'Adresse livraison' : 'Adresse achat'}} </td>
                                     <td>{{ addDTO?.rue }}</td>
                                     <td>{{ addDTO?.city }}</td>
                                     <td>{{ addDTO?.stateDto.name }}</td>

@@ -38,11 +38,11 @@
                             <thead>
                                 <tr>
                                     <th>Reference</th>
-                                    <th>Produit</th>
                                     <th>Fournisseur</th>
                                     <th>Telephone</th>
                                     <th>Email</th>
-                                    <th>Addresse</th>
+                                    <th>Adresse</th>
+                                    <th>Région</th>
                                     <th>Action</th>
 
                                 </tr>
@@ -50,14 +50,17 @@
                             <tbody>
                                 <tr *ngFor="let fourDTO of fournisseurListDTO | filter:searchText | paginate: {itemsPerPage: 15, currentPage: p}; let i=index;">
                                     <td>{{ fourDTO?.reference }}</td>
-                                    <td>{{ fourDTO?.productDto.designation }}</td>
                                     <td>{{ fourDTO?.firstName }} {{ fourDTO?.lastName }}</td>
                                     <td>{{ fourDTO?.telephone }}</td>
                                     <td>{{ fourDTO?.email }}</td>
                                     <td>{{ fourDTO?.stateDto.name }}</td>
+                                    <td>{{ fourDTO?.stateDto?.countryDto?.name }}</td>
 
                                     <td class="text-right">
-                                        <button class="btn btn-warning btn-sm" (click)="sendMailToFournisseur(fourDTO)">
+                                        <button class="btn btn-warning btn-sm" [routerLink]="['/admin/accueil/fournisseurs/detail', fourDTO.id]">
+                                            <i class="fa fa-eye" aria-hidden="true"></i></button
+                                          >&nbsp;
+                                        <button class="btn btn-sm" (click)="sendMailToFournisseur(fourDTO)">
                                             <i class="fa fa-envelope" aria-hidden="true"></i></button
                                           >&nbsp;
             

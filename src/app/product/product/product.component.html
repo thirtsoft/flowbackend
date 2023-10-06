@@ -84,17 +84,30 @@
                             </div>
 
                             <div class="form-group col-md-6">
-                                <label>En promo</label>
-                                <input type="checkbox" class="form-control" [(ngModel)]="formDataProductDTO.promo" name="promo" id="promo" #promo="ngModel" placeholder="promo" required>
+                                <label>Fournisseur</label>
+                                <div class="form-group">
+                                    <select name="fournisseurDto" id="fournisseurDto" [(ngModel)]="formDataProductDTO.fournisseurDto" class="form-control" #fournisseurDto="ngModel" required>
+                              <option value="0" selected disabled>-Select-</option>
+                              <option  *ngFor="let four of listFournisseurs" [ngValue]="four.id == formDataProductDTO.fournisseurDto?.id ? formDataProductDTO.fournisseurDto : four">{{four.lastName }} - {{four.firstName }}</option>
+                            </select>
+                                    <span class="text-danger" *ngIf="(fournisseurDto.touched || addProductForm.submitted) && fournisseurDto.errors?.['required']">
+                             Le fournisseur est obligatoire
+                            </span>
+                                </div>
                             </div>
 
                         </div>
 
                         <div class="row">
 
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-3">
                                 <label>Selectionné</label>
                                 <input type="checkbox" class="form-control" [(ngModel)]="formDataProductDTO.selected" name="selected" id="selected" #selected="ngModel" placeholder=" selected" required>
+                            </div>
+
+                            <div class="form-group col-md-3">
+                                <label>En promo</label>
+                                <input type="checkbox" class="form-control" [(ngModel)]="formDataProductDTO.promo" name="promo" id="promo" #promo="ngModel" placeholder="promo" required>
                             </div>
 
                             <div class="form-group col-md-6">

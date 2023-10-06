@@ -12,6 +12,7 @@ const pdfMake = window["pdfMake"];
 pdfMake.vfs = pdfFonts.pdfMake.vfs
 
 import * as moment from 'moment';
+import { ProductDto } from 'src/app/models/product';
 
 
 @Component({
@@ -33,6 +34,7 @@ export class ViewCommandeComponent implements OnInit {
   address_livraison_ville:any;
   address_livraison_city:any;
   username: any;
+  product?: ProductDto;
 
   constructor(public crudApi: CommandeService,
               public lcmdService: LigneCommandeService,
@@ -53,10 +55,16 @@ export class ViewCommandeComponent implements OnInit {
       this.telephone_client = this.lcmdService.listData[0].commandeDto.clientDto.mobile;
       this.telephone_client = this.lcmdService.listData[0].commandeDto.clientDto.mobile;
       this.email_client = this.lcmdService.listData[0].commandeDto.clientDto.email;
-      this.address_livraison_city = this.lcmdService.listData[0].commandeDto.billingAddressDto.city;
-      this.address_livraison_ville = this.lcmdService.listData[0].commandeDto.billingAddressDto.stateDto.name;
-      this.address_livraison_region = this.lcmdService.listData[0].commandeDto.billingAddressDto.stateDto.countryDto.name;
+      if (this.lcmdService.listData[0].commandeDto.billingAddressDto?.isBillingAddress == 1) {
+        this.address_livraison_city = this.lcmdService.listData[0].commandeDto.billingAddressDto.city;
+        this.address_livraison_ville = this.lcmdService.listData[0].commandeDto.billingAddressDto.stateDto.name;
+        this.address_livraison_region = this.lcmdService.listData[0].commandeDto.billingAddressDto.stateDto.countryDto.name;
+      }
       this.username = this.lcmdService.listData[0].commandeDto.utilisateurDto.name;
+
+      for (let i = 0; i < this.lcmdService.listData.length; i++) {
+        this.getProductById(this.lcmdService.listData[i].productId);
+      }
 
       console.log("Username: " +this.username);
     }, err => {
@@ -70,6 +78,16 @@ export class ViewCommandeComponent implements OnInit {
     .subscribe(
       response =>{
         this.listCommandeData = response;
+      }
+    );
+
+  }
+
+  getProductById(prodId: number) {
+    this.productService.getProductDTOById(prodId)
+    .subscribe(
+      response =>{
+        this.product = response;
       }
     );
 

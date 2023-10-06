@@ -1,0 +1,127 @@
+<div class="content-wrapper">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h3>Détail d'un fournisseur</h3>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a routerLink="/admin/accueil/dashboard">Accueil</a></li>
+                        <li class="breadcrumb-item active">Fournisseurs</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row" style="margin-left: 2%;">
+                <div class="col-sm-3 col-2">
+               
+                    <input type="text" class="form-control" 
+
+                    type="text" class="form-control" value="{{nomCompletFournisseur}}"
+                     />
+               
+                    </div>&nbsp;&nbsp;
+
+                    <div class="col-sm-3 col-2">
+                    <input type="text" class="form-control" type="text" 
+                    class="form-control"  value="{{adresseFournisseur}}" />
+                </div>&nbsp;&nbsp;
+                
+                <div class="col-sm-4 col-3">
+                    <input type="text" class="form-control" type="text" 
+                    class="form-control" value="{{telephoneFournisseur}}" />
+                </div>
+            </div>
+
+            <div class="row" style="margin-left: 2%; margin-top: 1%;">
+                <div class="col-sm-3 col-2">
+               
+                    <input type="text" class="form-control" 
+
+                    type="text" class="form-control" value="{{emailFournisseur}}"
+                     />
+               
+                    </div>&nbsp;&nbsp;
+
+             
+                    <div class="col-sm-3 col-2">
+                    <input type="text" class="form-control" type="text" 
+                    class="form-control"  value="{{regionFournisseur}}" />
+                </div>
+                
+            </div>
+           
+           
+            <div class="row text-center" style="margin-top: 2%;margin-left: 30%;">
+                <div class="col-sm-4 col-3">
+                    <input type="text" class="form-control" type="text" class="form-control" placeholder="Search" [(ngModel)]="searchText" />
+                </div>
+
+                <div class="col-sm-6 col-6 text-right m-b-20">
+                    <a (click)="goBack()" class="btn btn btn-primary btn-lg btn-rounded float-right">
+                        <span class="fa fa-arrow-left"></span> Retour</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Photo</th>
+                                    <th>Reference</th>
+                                    <th>Designation</th>
+                                    <th>Categorie</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Promo</th>
+                                    <th>Selected</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="
+                        let prodDTO of listDataProductsDTOs
+                        | filter: searchText
+                            | paginate: { itemsPerPage: 15, currentPage: p }
+                        ">
+                                    <td [routerLink]="['/admin/accueil/products/detailProduct', prodDTO.id]" style="cursor: pointer">
+                                      <img height="90" width="90" class="img-circle" alt="" src="{{
+                                        this.prodService.apiServerUrl +
+                                          '/products/photoProduct/' +
+                                          prodDTO.id
+                                      }}" />
+                                    </td>
+                                    <td>{{ prodDTO?.reference }}</td>
+                                    <td>{{ prodDTO?.designation }}</td>
+                                    <td>{{ prodDTO?.subCategoryDto?.subCategoryName }}</td>
+                                    <td>{{ prodDTO?.price }}</td>
+                                    <td>{{ prodDTO?.quantity }}</td>
+                                    <td>{{ prodDTO?.promo }}</td>
+                                    <td>{{ prodDTO?.selected }}</td>
+                                    <td class="text-right">
+                                        <button class="btn btn-warning btn-sm" [routerLink]="['/admin/accueil/products/detailProduct', prodDTO.id]">
+                          <i class="fa fa-eye" aria-hidden="true"></i></button
+                        >&nbsp;
+                
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="pagination">
+                  <pagination-controls (pageChange)="p=$event"></pagination-controls>
+                </div>
+              </div>
+            </div>
+          </div>
+
+      </div>
+  </section>
+
+   
+</div>

@@ -10,6 +10,6 @@ export class AddressDto {
     state!: string;
     country!: string;
     zipCode!: string;
-  
+    isBillingAddress?: number;
     stateDto!: StateDto; 
 }

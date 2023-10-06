@@ -6,6 +6,7 @@ import { ListFournisseurComponent } from './list-fournisseur/list-fournisseur.co
 import { ListNewsletterComponent } from './list-newsletter/list-newsletter.component';
 import { MailToFournisseurComponent } from './mail-to-fournisseur/mail-to-fournisseur.component';
 import { MailToNewsletterComponent } from './mail-to-newsletter/mail-to-newsletter.component';
+import { DetailFournisseurComponent } from './detail-fournisseur/detail-fournisseur.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,10 @@ const routes: Routes = [
   {
     path: 'fournisseur/:id',
     component: FournisseurComponent
+  },
+  {
+    path: 'detail/:id',
+    component: DetailFournisseurComponent
   },
   { 
     path: 'newsletters', 
@@ -35,7 +40,7 @@ const routes: Routes = [
   {
     path: 'mail-to-newsletter',
     component: MailToNewsletterComponent
-  }
+  },
 ];
 
 @NgModule({

@@ -15,6 +15,7 @@ import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/materia
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { DetailFournisseurComponent } from './detail-fournisseur/detail-fournisseur.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { MatInputModule } from '@angular/material/input';
     FournisseurComponent,
     ListNewsletterComponent,
     MailToNewsletterComponent,
-    MailToFournisseurComponent
+    MailToFournisseurComponent,
+    DetailFournisseurComponent
   ],
   imports: [
     CommonModule,

@@ -80,22 +80,11 @@
                         <div class="row">
 
 
-                            <div class="form-group col-sm-6">
-                                <label>Produit</label>
-
-                                <select name="productDto" id="productDto" [(ngModel)]="formDataFournisseurDTO.productDto" class="form-control" #productDto="ngModel" required>
-                          <option value="0" selected disabled>-Select-</option>
-                          <option  *ngFor="let prodDTO of listDataProductsDTOs" [ngValue]="prodDTO.id == formDataFournisseurDTO.productDto?.id ? formDataFournisseurDTO.productDto : prodDTO">{{prodDTO.designation}}</option>
-                        </select>
-                                <span class="text-danger" *ngIf="(productDto.touched || addFournisseurForm.submitted) && productDto.errors?.['required']">
-                              produit est obligatoire
-                        </span>
-
-                            </div>
+                    
 
                             <div class="form-group col-sm-6">
 
-                                <label>Addresse</label>
+                                <label>Adresse</label>
 
                                 <select name="stateDto" id="stateDto" [(ngModel)]="formDataFournisseurDTO.stateDto" class="form-control" #stateDto="ngModel" required>
                           <option value="0" selected disabled>-Select-</option>

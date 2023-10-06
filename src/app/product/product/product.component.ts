@@ -2,8 +2,10 @@ import { HttpErrorResponse, HttpEventType, HttpResponse } from '@angular/common/
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { FournisseurDto } from 'src/app/models/fournisseur';
 import { ProductDto } from 'src/app/models/product';
 import { SubCategoryDto } from 'src/app/models/sub-category';
+import { FournisseurService } from 'src/app/services/fournisseur.service';
 import { ProductService } from 'src/app/services/product.service';
 import { SubCategoryService } from 'src/app/services/sub-category.service';
 
@@ -17,6 +19,7 @@ export class ProductComponent implements OnInit {
   formDataProductDTO: ProductDto = new ProductDto();
   listSubCategoryData: SubCategoryDto[] = [];
   listProductsData: ProductDto[] = [];
+  listFournisseurs: FournisseurDto[] = [];
 
   productPhotoFile: any;
   data:any;
@@ -36,6 +39,7 @@ export class ProductComponent implements OnInit {
 
   constructor(public crudApi: ProductService,
               public subCatService: SubCategoryService,
+              private fourService: FournisseurService,
               private toastr: ToastrService,
   //            public dialog: MatDialog,
               private actRoute: ActivatedRoute,
@@ -57,6 +61,7 @@ export class ProductComponent implements OnInit {
       this.getProductDTOById(this.paramId);
     }
     this.getListSubCategoriesDTOs();
+    this.getListFournisseurs();
   }
 
   getProductDTOById(id: number) {
@@ -74,6 +79,16 @@ export class ProductComponent implements OnInit {
     this.subCatService.getAllAcvivesSubcategorieDTOs().subscribe(
       (response: SubCategoryDto[]) => {
         this.listSubCategoryData = response;
+      }, (error: HttpErrorResponse) => {
+        console.log(error.message);
+      }
+    )
+  }
+
+  getListFournisseurs() {
+    this.fourService.getAllActivesFournisseurDTOs().subscribe(
+      (response: FournisseurDto[]) => {
+        this.listFournisseurs = response;
       }, (error: HttpErrorResponse) => {
         console.log(error.message);
       }
@@ -99,11 +114,11 @@ export class ProductComponent implements OnInit {
           positionClass: 'toast-top-right',
         });
         this.router.navigateByUrl("admin/accueil/products/listProducts").then(() => {
-          window.location.reload();
+          this.getListProductsDTOs();
         });
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.toastr.error("Error lors de la l\'ajout du produit");
       }
     );
   }

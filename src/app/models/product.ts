@@ -1,3 +1,4 @@
+import { FournisseurDto } from "./fournisseur";
 import { SubCategoryDto } from "./sub-category";
 
 export class Product {
@@ -16,5 +17,6 @@ export class ProductDto {
     manufactured!: string;
     photo!: string;
 
-    subCategoryDto!: SubCategoryDto; 
+    subCategoryDto!: SubCategoryDto;
+    fournisseurDto?: FournisseurDto;
 }

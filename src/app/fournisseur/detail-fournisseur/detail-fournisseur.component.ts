@@ -10,21 +10,31 @@ import { ProductService } from 'src/app/services/product.service';
 import { StateService } from 'src/app/services/state.service';
 
 @Component({
-  selector: 'app-fournisseur',
-  templateUrl: './fournisseur.component.html',
-  styleUrls: ['./fournisseur.component.css']
+  selector: 'app-detail-fournisseur',
+  templateUrl: './detail-fournisseur.component.html',
+  styleUrls: ['./detail-fournisseur.component.css']
 })
-export class FournisseurComponent implements OnInit {
+export class DetailFournisseurComponent implements OnInit {
 
   formDataFournisseurDTO: FournisseurDto = new FournisseurDto();
+  listDataProductsDTOs!: ProductDto[];
   listDataStatesDTOs!: StateDto[];
 
   data:any;
   paramId :any = 0;
   mySubscription: any;
+  id!: number;
+  p: number=1;
+  searchText: any;
+  nomCompletFournisseur?: string;
+  telephoneFournisseur?: string;
+  emailFournisseur?: string;
+  adresseFournisseur?: string;
+  regionFournisseur?: string;
 
   constructor(private crudApi: FournisseurService,
               private statService: StateService,
+              public prodService: ProductService,
               private router: Router,
               private toastr: ToastrService,
             //  public dialog: MatDialog,
@@ -45,6 +55,7 @@ export class FournisseurComponent implements OnInit {
     this.paramId = this.actRoute.snapshot.paramMap.get('id');
     if(this.paramId  && this.paramId  > 0){
       this.getFournisseurDTOById(this.paramId);
+      this.getListProductsDTOs(this.paramId);
     }
   }
 
@@ -52,12 +63,28 @@ export class FournisseurComponent implements OnInit {
     this.crudApi.getFournisseurDtoById(id).subscribe(
       (response: FournisseurDto) => {
         this.formDataFournisseurDTO = response;
+        this.nomCompletFournisseur = this.formDataFournisseurDTO.lastName + " " + this.formDataFournisseurDTO.firstName;
+        this.telephoneFournisseur = this.formDataFournisseurDTO.telephone;
+        this.emailFournisseur = this.formDataFournisseurDTO.email;
+        this.adresseFournisseur = this.formDataFournisseurDTO.stateDto?.name;
+        this.regionFournisseur = this.formDataFournisseurDTO.stateDto.countryDto.name
+        
       },
       (error: HttpErrorResponse) => {
         this.toastr.error("Erreur lors de la récupération de la liste du fournisseur");
       }
     );
 
+  }
+
+  getListProductsDTOs(fournisseurId?: number) {
+    this.crudApi.getProductsByFournisseurId(fournisseurId).subscribe(
+      (response: ProductDto[]) => {
+        this.listDataProductsDTOs = response;
+      }, (error: HttpErrorResponse) => {
+        this.toastr.error("Erreur lors de la récupération de la liste des produits");
+      }
+    )
   }
 
   getListStatesDTOs() {
@@ -70,42 +97,10 @@ export class FournisseurComponent implements OnInit {
     )
   }
 
-  onAddFournisseur() {
-    this.crudApi.addFournisseurDto(this.formDataFournisseurDTO).subscribe(
-      (response: FournisseurDto) => {
-        this.toastr.success('avec succès','Fournisseur Ajoutée', {
-          timeOut: 1500,
-          positionClass: 'toast-top-right',
-        });
-        this.router.navigateByUrl("admin/accueil/fournisseurs/listFournisseurs").then(() => {
-          window.location.reload();
-        });
-      },
-      (error: HttpErrorResponse) => {
-        this.toastr.error("Erreur lors de l\'ajout du fournisseur");
-      }
-    );
-  }
-
-  onUpdateFournisseur() {
-    this.crudApi.updateFournisseurDto(this.formDataFournisseurDTO.id, this.formDataFournisseurDTO).subscribe(
-      (response: FournisseurDto) => {
-        this.toastr.warning('avec succès','Fournisseur Modifiée', {
-          timeOut: 1500,
-          positionClass: 'toast-top-right',
-        });
-        this.router.navigateByUrl("admin/accueil/fournisseurs/listFournisseurs").then(() => {
-          window.location.reload();
-        });
-      },
-      (error: HttpErrorResponse) => {
-        this.toastr.error("Erreur lors de la modification du fournisseur");
-      }
-    );
-  }
 
   goBack() {
     this.router.navigateByUrl("admin/accueil/fournisseurs/listFournisseurs");
   }
+
 
 }

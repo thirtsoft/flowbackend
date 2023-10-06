@@ -4,6 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { FournisseurDto } from '../models/fournisseur';
+import { ProductDto } from '../models/product';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,6 @@ export class FournisseurService {
 
   constructor(private http: HttpClient) {
   }
-  /**************** FournisseurDTO  *******/
 
   public getAllActivesFournisseurDTOs(): Observable<FournisseurDto[]> {
     return this.http.get<FournisseurDto[]>(`${this.apiServerUrl}/fournisseurs/search-all-active-fournisseurs`);
@@ -37,6 +37,10 @@ export class FournisseurService {
 
   public deleteFournisseurDto(fourId: number): Observable<void> {
     return this.http.delete<void>(`${this.apiServerUrl}/fournisseurs/delete-fournisseur/${fourId}`);
+  }
+
+  public getProductsByFournisseurId(fournisseurId?: number): Observable<ProductDto[]> {
+    return this.http.get<ProductDto[]>(`${this.apiServerUrl}/products/products-by-fournisseur/${fournisseurId}`);
   }
 
 }
