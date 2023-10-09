@@ -4,6 +4,8 @@ import { CountryComponent } from './country/country.component';
 import { ListCountryComponent } from './list-country/list-country.component';
 import { ListStateComponent } from './list-state/list-state.component';
 import { StateComponent } from './state/state.component';
+import { ListZoneLivraisonComponent } from './list-zone-livraison/list-zone-livraison.component';
+import { ZoneLivraison } from '../models/zone-livraison';
 
 const routes: Routes = [
   {
@@ -29,6 +31,19 @@ const routes: Routes = [
   {
     path: 'state/:id',
     component: StateComponent
+  },
+
+  { 
+    path: 'zone-livraisons', 
+    component: ListZoneLivraisonComponent
+  },
+  {
+    path: 'zone-livraison',
+    component: ZoneLivraison
+  },
+  {
+    path: 'zone-livraison/:id',
+    component: ZoneLivraison
   },
 ];
 

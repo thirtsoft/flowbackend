@@ -1,72 +1,142 @@
 <div class="content-wrapper">
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Départements</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a routerLink="/admin/accueil/dashboard">Accueil</a></li>
-                        <li class="breadcrumb-item active">Départements</li>
-                    </ol>
-                </div>
-            </div>
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Départements</h1>
         </div>
-    </section>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item">
+              <a routerLink="/admin/accueil/dashboard">Accueil</a>
+            </li>
+            <li class="breadcrumb-item active">Départements</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <section class="content">
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-                <div class="col-md-12">
-                    <h2 *ngIf="!paramId">Nouveau département</h2>
-                    <h2 *ngIf="paramId">Modifié département</h2>
-                    <form #addStateForm="ngForm">
-
-                        <div class="form-group">
-                            <label>Nom</label>
-                            <input type="text" placeholder="Nom" class="form-control" [(ngModel)]="formDataStateDTO.name" name="name" id="name" #name="ngModel" required />
-                            <span class="text-danger" *ngIf="
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-md-12">
+          <h2 *ngIf="!paramId">Nouveau département</h2>
+          <h2 *ngIf="paramId">Modifié département</h2>
+          <form #addStateForm="ngForm">
+            <div class="form-group">
+              <label>Nom</label>
+              <input
+                type="text"
+                placeholder="Nom"
+                class="form-control"
+                [(ngModel)]="formDataStateDTO.name"
+                name="name"
+                id="name"
+                #name="ngModel"
+                required
+              />
+              <span
+                class="text-danger"
+                *ngIf="
                         (name.touched || addStateForm.submitted) &&
                         name.errors?.['required']
-                      ">
-                      nom est obligatoire
-                    </span>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Région</label>
-                            <select name="countryDto" id="countryDto" [(ngModel)]="formDataStateDTO.countryDto" class="form-control" #countryDto="ngModel" required>
-                        <option value="0" selected disabled>-Select-</option>
-                        <option  *ngFor="let countDTO of listDataCountriesDTOs" [ngValue]="countDTO.id == formDataStateDTO.countryDto?.id ? formDataStateDTO.countryDto : countDTO">{{countDTO.name}}</option>
-                      </select>
-                            <span class="text-danger" *ngIf="(countryDto.touched || addStateForm.submitted) && countryDto.errors?.['required']">
-                            région est obligatoire
-                      </span>
-
-                        </div>
-
-                        <div class="form-group">
-                            <button *ngIf="!paramId" type="submit" class="btn btn-success" (click)="onAddState()" style="cursor: pointer;">
-                  <i class="fa fa-database"></i> Enregistrer</button
-                >&nbsp;
-                <button
-                  *ngIf="paramId"
-                  class="btn btn-warning"
-                  (click)="onUpdateState()"
-                  style="cursor: pointer;"
-                >
-                  <i class="fa fa-database"></i>Modifier
-                </button>
-                            <button type="button" class="btn btn-danger ml-1" (click)="goBack()" style="cursor: pointer;">
-                  <i class="fa fa-close"></i> Retoru
-                </button>
-                        </div>
-
-                    </form>
-                </div>
-
+                      "
+              >
+                nom est obligatoire
+              </span>
             </div>
+
+            <div class="form-group">
+                <label>Zone livraison</label>
+                <select
+                  name="zoneLivraisonDto"
+                  id="zoneLivraisonDto"
+                  [(ngModel)]="formDataStateDTO.zoneLivraisonDto"
+                  class="form-control"
+                  #zoneLivraisonDto="ngModel"
+                  required
+                >
+                  <option value="0" selected disabled>-Select-</option>
+                  <option
+                    *ngFor="let zoneDTO of listZoneLivraisonDTOs"
+                    [ngValue]="
+                    zoneDTO.id == formDataStateDTO.zoneLivraisonDto?.id
+                        ? formDataStateDTO.zoneLivraisonDto
+                        : zoneDTO
+                    "
+                  >
+                    {{ zoneDTO.libelle }}
+                  </option>
+                </select>
+                <span
+                  class="text-danger"
+                  *ngIf="(countryDto.touched || addStateForm.submitted) && countryDto.errors?.['required']"
+                >
+                  zone livraison est obligatoire
+                </span>
+              </div>
+
+            <div class="form-group">
+              <label>Région</label>
+              <select
+                name="countryDto"
+                id="countryDto"
+                [(ngModel)]="formDataStateDTO.countryDto"
+                class="form-control"
+                #countryDto="ngModel"
+                required
+              >
+                <option value="0" selected disabled>-Select-</option>
+                <option
+                  *ngFor="let countDTO of listDataCountriesDTOs"
+                  [ngValue]="
+                    countDTO.id == formDataStateDTO.countryDto?.id
+                      ? formDataStateDTO.countryDto
+                      : countDTO
+                  "
+                >
+                  {{ countDTO.name }}
+                </option>
+              </select>
+              <span
+                class="text-danger"
+                *ngIf="(countryDto.touched || addStateForm.submitted) && countryDto.errors?.['required']"
+              >
+                région est obligatoire
+              </span>
+            </div>
+
+            <div class="form-group">
+              <button
+                *ngIf="!paramId"
+                type="submit"
+                class="btn btn-success"
+                (click)="onAddState()"
+                style="cursor: pointer"
+              >
+                <i class="fa fa-database"></i> Enregistrer</button
+              >&nbsp;
+              <button
+                *ngIf="paramId"
+                class="btn btn-warning"
+                (click)="onUpdateState()"
+                style="cursor: pointer"
+              >
+                <i class="fa fa-database"></i>Modifier
+              </button>
+              <button
+                type="button"
+                class="btn btn-danger ml-1"
+                (click)="goBack()"
+                style="cursor: pointer"
+              >
+                <i class="fa fa-close"></i> Retour
+              </button>
+            </div>
+          </form>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 </div>

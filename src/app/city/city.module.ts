@@ -9,6 +9,8 @@ import { StateComponent } from './state/state.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ListZoneLivraisonComponent } from './list-zone-livraison/list-zone-livraison.component';
+import { ZoneLivraisonComponent } from './zone-livraison/zone-livraison.component';
 
 
 @NgModule({
@@ -16,7 +18,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CountryComponent,
     ListCountryComponent,
     ListStateComponent,
-    StateComponent
+    StateComponent,
+    ListZoneLivraisonComponent,
+    ZoneLivraisonComponent
   ],
   imports: [
     CommonModule,

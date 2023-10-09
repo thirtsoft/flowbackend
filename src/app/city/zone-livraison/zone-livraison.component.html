@@ -1,0 +1,81 @@
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Zone livraison</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item">
+              <a routerLink="/admin/accueil/dashboard">Accueil</a>
+            </li>
+            <li class="breadcrumb-item active">Zone livraison</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-md-12">
+          <h2 *ngIf="!paramId">Nouveau zone livraison</h2>
+          <h2 *ngIf="paramId">Modifié zone livraison</h2>
+          <form #addZoneLivraisonForm="ngForm">
+            <div class="form-group">
+              <label>Libelle</label>
+              <input
+                type="text"
+                placeholder="Nom"
+                class="form-control"
+                [(ngModel)]="zoneLivraison.libelle"
+                name="libelle"
+                #libelle="ngModel"
+                required
+              />
+              <span
+                class="text-danger"
+                *ngIf="
+                          (libelle.touched || addZoneLivraisonForm.submitted) &&
+                          libelle.errors?.['required']
+                        "
+              >
+                le libellé de la zone est obligatoire
+              </span>
+            </div>
+
+            <div class="form-group">
+              <button
+                *ngIf="!paramId"
+                type="submit"
+                class="btn btn-success"
+                (click)="onAddZoneLivraison()"
+                style="cursor: pointer"
+              >
+                <i class="fa fa-database"></i> Enregistrer</button
+              >&nbsp;
+              <button
+                *ngIf="paramId"
+                class="btn btn-warning"
+                (click)="onUpdateZoneLivraison()"
+                style="cursor: pointer"
+              >
+                <i class="fa fa-database"></i>Modifier
+              </button>
+              <button
+                type="button"
+                class="btn btn-danger ml-1"
+                (click)="goBack()"
+                style="cursor: pointer"
+              >
+                <i class="fa fa-close"></i> Retour
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

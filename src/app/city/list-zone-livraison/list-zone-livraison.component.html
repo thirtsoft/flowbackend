@@ -7,7 +7,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a routerLink="/admin/accueil/dashboard">Accueil</a></li>
-                        <li class="breadcrumb-item active">Départements</li>
+                        <li class="breadcrumb-item active">Zone livraisons</li>
                     </ol>
                 </div>
             </div>
@@ -18,7 +18,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-4 col-3">
-                    <h4>Gestion des départements</h4>
+                    <h4>Gestion des zones de livraisons</h4>
                 </div>
 
                 <div class="col-sm-4 col-3">
@@ -27,8 +27,8 @@
 
                 <div class="col-sm-4 col-6 text-right m-b-20">
 
-                    <a (click)="onAddState()" class="btn btn btn-primary btn-rounded float-right">
-                        <i class="fa fa-plus"></i>Ajouter département</a>
+                    <a (click)="onAddZoneLivraison()" class="btn btn btn-primary btn-rounded float-right">
+                        <i class="fa fa-plus"></i>Ajouter zone livraison</a>
                 </div>
             </div>
             <div class="row">
@@ -38,25 +38,21 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Nom</th>
-                                    <th>Zone livraison</th>
-                                    <th>Région</th>
+                                    <th>Libellé</th>
                                     <th class="text-right">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let stateDTO of stateListDTO | filter:searchText | paginate: {itemsPerPage: 15, currentPage: p}; let i=index;">
-                                    <td>{{ stateDTO?.id }}</td>
-                                    <td>{{ stateDTO?.name }}</td>
-                                    <td>{{ stateDTO?.zoneLivraisonDto.libelle }}</td>
-                                    <td>{{ stateDTO?.countryDto.name }}</td>
+                                <tr *ngFor="let zone of zoneList | filter:searchText | paginate: {itemsPerPage: 5, currentPage: p}; let i=index;">
+                                    <td>{{ zone?.id }}</td>
+                                    <td>{{ zone?.libelle }}</td>
                                     <td class="text-right">
-                                        <button class="btn btn-primary btn-lg" [routerLink]="['/admin/accueil/localities/state', stateDTO.id]">
+                                        <button class="btn btn-primary btn-lg" [routerLink]="['/admin/accueil/localities/zone-livraison', zone.id]">
                                         <em class="fa fa-edit" aria-hidden="true"></em></button
                                       >&nbsp;
                                       <button
                                         class="btn btn-danger btn-lg"
-                                        (click)="onDeleteState(stateDTO.id)"
+                                        (click)="onDeleteZoneLivraison(zone.id)"
                                       >
                                         <i class="fa fa-trash" aria-hidden="true"></i></button
                                       >&nbsp;

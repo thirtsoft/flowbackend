@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { StateDto } from '../models/state';
+import { ZoneLivraison } from '../models/zone-livraison';
 
 @Injectable({
   providedIn: 'root'
@@ -49,6 +50,27 @@ export class StateService {
 
   public deleteStateDTO(StateId: number): Observable<void> {
     return this.http.delete<void>(`${this.apiServerUrl}/states/delete-state/${StateId}`);
+  }
+
+  /**     Zone de livraison */
+  public getAllActivesZoneLivraisons(): Observable<ZoneLivraison[]> {
+    return this.http.get<ZoneLivraison[]>(`${this.apiServerUrl}/zonelivraison/search-all-active-zone-livraisons`);
+  }
+
+  public getZoneLivraisonById(zoneId: number): Observable<ZoneLivraison> {
+    return this.http.get<ZoneLivraison>(`${this.apiServerUrl}/zonelivraison/findById/${zoneId}`);
+  }
+
+  public addZoneLivraison(zone: ZoneLivraison): Observable<ZoneLivraison> {
+    return this.http.post<ZoneLivraison>(`${this.apiServerUrl}/zonelivraison/create`, zone);
+  }
+
+  public updateZoneLivraison(zoneId: number, zone: ZoneLivraison): Observable<ZoneLivraison> {
+    return this.http.put<ZoneLivraison>(`${this.apiServerUrl}/zonelivraison/update/${zoneId}`, zone);
+  }
+
+  public deleteZoneLivraison(zoneId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiServerUrl}/zonelivraison/delete-zone-livraison/${zoneId}`);
   }
 
 }

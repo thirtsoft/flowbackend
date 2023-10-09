@@ -4,6 +4,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { CountryDto } from 'src/app/models/country';
 import { StateDto } from 'src/app/models/state';
+import { ZoneLivraison } from 'src/app/models/zone-livraison';
 import { CountryService } from 'src/app/services/country.service';
 import { StateService } from 'src/app/services/state.service';
 
@@ -17,6 +18,7 @@ export class StateComponent implements OnInit {
   formDataStateDTO: StateDto = new StateDto();
   listDataCountriesDTOs!: CountryDto[];
   stateListDTO?: StateDto[] = [];
+  listZoneLivraisonDTOs?: ZoneLivraison[] = [];
 
   data: any;
   paramId :any = 0;
@@ -24,7 +26,6 @@ export class StateComponent implements OnInit {
 
   constructor(private crudApi: StateService,
               private countService: CountryService,
-              private statService: StateService,
               private router: Router,
               private toastr: ToastrService,
             //  public dialog: MatDialog,
@@ -42,6 +43,7 @@ export class StateComponent implements OnInit {
 
   ngOnInit(): void {
     this.getListCountriesDTOs();
+    this.getListZoneLivraisonsDTOs();
     this.paramId = this.actRoute.snapshot.paramMap.get('id');
     if(this.paramId  && this.paramId  > 0){
       this.getStateDTOById(this.paramId);
@@ -69,6 +71,16 @@ export class StateComponent implements OnInit {
       }
     );
 
+  }
+
+  getListZoneLivraisonsDTOs() {
+    this.crudApi.getAllActivesZoneLivraisons().subscribe(
+      (response: ZoneLivraison[]) => {
+        this.listZoneLivraisonDTOs = response;
+      }, (error: HttpErrorResponse) => {
+        this.toastr.error("Erreur lors de la récupération de la list des zone de livraisons");
+      }
+    )
   }
 
   getListCountriesDTOs() {
