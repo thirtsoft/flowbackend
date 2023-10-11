@@ -1,124 +1,235 @@
 <div class="content-wrapper">
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Fournisseur</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a routerLink="/admin/accueil/dashboard">Accueil</a></li>
-                        <li class="breadcrumb-item active">Fournisseurs</li>
-                    </ol>
-                </div>
-            </div>
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Fournisseur</h1>
         </div>
-    </section>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item">
+              <a routerLink="/admin/accueil/dashboard">Accueil</a>
+            </li>
+            <li class="breadcrumb-item active">Fournisseurs</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <section class="content">
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-                <div class="col-md-12">
-                    <h2 *ngIf="!paramId">Nouveau fournisseur</h2>
-                    <h2 *ngIf="paramId">Modifié fournisseur</h2>
-                    <form #addFournisseurForm="ngForm">
-
-                        <div class="form-group">
-
-                            <label>Reference</label>
-                            <input type="text" placeholder="Reference" class="form-control" [(ngModel)]="formDataFournisseurDTO.reference" name="reference" id="reference" #reference="ngModel" required />
-                            <span class="text-danger" *ngIf="
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-md-12">
+          <h2 *ngIf="!paramId">Nouveau fournisseur</h2>
+          <h2 *ngIf="paramId">Modifié fournisseur</h2>
+          <form #addFournisseurForm="ngForm">
+            <div class="form-group">
+              <label>Reference</label>
+              <input
+                type="text"
+                placeholder="Reference"
+                class="form-control"
+                [(ngModel)]="formDataFournisseurDTO.reference"
+                name="reference"
+                id="reference"
+                #reference="ngModel"
+                required
+              />
+              <span
+                class="text-danger"
+                *ngIf="
                         (reference.touched || addFournisseurForm.submitted) &&
                         reference.errors?.['required']
-                      ">
-                      reference est obligatoire
-                    </span>
-
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-sm-6">
-                                <label>Prénom</label>
-                                <input type="text" placeholder="Prénom" class="form-control" [(ngModel)]="formDataFournisseurDTO.firstName" name="firstName" id="firstName" #firstName="ngModel" required />
-                                <span class="text-danger" *ngIf="
+                      "
+              >
+                reference est obligatoire
+              </span>
+            </div>
+            <div class="row">
+              <div class="form-group col-sm-6">
+                <label>Prénom</label>
+                <input
+                  type="text"
+                  placeholder="Prénom"
+                  class="form-control"
+                  [(ngModel)]="formDataFournisseurDTO.firstName"
+                  name="firstName"
+                  id="firstName"
+                  #firstName="ngModel"
+                  required
+                />
+                <span
+                  class="text-danger"
+                  *ngIf="
                            (firstName.touched || addFournisseurForm.submitted) &&
                             firstName.errors?.['required']
-                        ">
-                            Prénom est obligatoire
-                        </span>
-                            </div>
+                        "
+                >
+                  Prénom est obligatoire
+                </span>
+              </div>
 
-                            <div class="form-group col-sm-6">
-                                <label>Nom</label>
-                                <input type="text" placeholder="Nom" class="form-control" [(ngModel)]="formDataFournisseurDTO.lastName" name="lastName" id="lastName" #lastName="ngModel" required />
-                                <span class="text-danger" *ngIf="
+              <div class="form-group col-sm-6">
+                <label>Nom</label>
+                <input
+                  type="text"
+                  placeholder="Nom"
+                  class="form-control"
+                  [(ngModel)]="formDataFournisseurDTO.lastName"
+                  name="lastName"
+                  id="lastName"
+                  #lastName="ngModel"
+                  required
+                />
+                <span
+                  class="text-danger"
+                  *ngIf="
                           (lastName.touched || addFournisseurForm.submitted) &&
                           lastName.errors?.['required']
-                          ">
-                          Nom est obligatoire
-                        </span>
+                          "
+                >
+                  Nom est obligatoire
+                </span>
+              </div>
 
-                            </div>
-
-                            <div class="form-group col-sm-6">
-                                <label>Téléphone</label>
-                                <input type="text" placeholder="77 456 12 47" class="form-control" [(ngModel)]="formDataFournisseurDTO.telephone" name="telephone" id="telephone" #telephone="ngModel" required />
-                                <span class="text-danger" *ngIf="
+              <div class="form-group col-sm-6">
+                <label>Téléphone wave</label>
+                <input
+                  type="text"
+                  placeholder="77 456 12 47"
+                  class="form-control"
+                  [(ngModel)]="formDataFournisseurDTO.telephone"
+                  name="telephone"
+                  id="telephone"
+                  #telephone="ngModel"
+                  required
+                />
+                <span
+                  class="text-danger"
+                  *ngIf="
                           (telephone.touched || addFournisseurForm.submitted) &&
                           telephone.errors?.['required']
-                        ">
-                        telephone est obligatoire
-                      </span>
-                            </div>
-
-                            <div class="form-group col-sm-6">
-                                <label>Email</label>
-                                <input type="email" placeholder="example@gmail.com" class="form-control" [(ngModel)]="formDataFournisseurDTO.email" name="email" id="email" #email="ngModel" />
-                            </div>
-
-                        </div>
-
-                        <div class="row">
-
-
-                    
-
-                            <div class="form-group col-sm-6">
-
-                                <label>Adresse</label>
-
-                                <select name="stateDto" id="stateDto" [(ngModel)]="formDataFournisseurDTO.stateDto" class="form-control" #stateDto="ngModel" required>
-                          <option value="0" selected disabled>-Select-</option>
-                          <option  *ngFor="let stateDTO of listDataStatesDTOs" [ngValue]="stateDTO.id == formDataFournisseurDTO.stateDto?.id ? formDataFournisseurDTO.stateDto : stateDTO">{{stateDTO.name}}</option>
-                        </select>
-                                <span class="text-danger" *ngIf="(stateDto.touched || addFournisseurForm.submitted) && stateDto.errors?.['required']">
-                              adresse est obligatoire
-                        </span>
-
-                            </div>
-
-                        </div>
-
-                        <div class="form-group">
-                            <button *ngIf="!paramId" type="submit" class="btn btn-success" (click)="onAddFournisseur()" style="cursor: pointer;">
-                  <i class="fa fa-database"></i> Enregistrer</button
-                >&nbsp;
-                <button
-                  *ngIf="paramId"
-                  class="btn btn-warning"
-                  (click)="onUpdateFournisseur()"
-                  style="cursor: pointer;"
+                        "
                 >
-                  <i class="fa fa-database"></i>Modifier
-                </button>
-                            <button type="button" class="btn btn-danger ml-1" (click)="goBack()" style="cursor: pointer;">
-                  <i class="fa fa-close"></i> Retour
-                </button>
-                        </div>
+                  telephone wave est obligatoire
+                </span>
+              </div>
 
-                    </form>
-                </div>
+              <div class="form-group col-sm-6">
+                <label>Téléphone orange money</label>
+                <input
+                  type="text"
+                  placeholder="77 456 12 47"
+                  class="form-control"
+                  [(ngModel)]="formDataFournisseurDTO.telephone2"
+                  name="telephone2"
+                  id="telephone2"
+                  #telephone2="ngModel"
+                  required
+                />
+                <span
+                  class="text-danger"
+                  *ngIf="
+                          (telephone2.touched || addFournisseurForm.submitted) &&
+                          telephone2.errors?.['required']
+                        "
+                >
+                  telephone orange money est obligatoire
+                </span>
+              </div>
 
             </div>
+
+            <div class="row">
+              <div class="form-group col-sm-6">
+                <label>Adresse</label>
+
+                <select
+                  name="stateDto"
+                  id="stateDto"
+                  [(ngModel)]="formDataFournisseurDTO.stateDto"
+                  class="form-control"
+                  #stateDto="ngModel"
+                  required
+                >
+                  <option value="0" selected disabled>-Select-</option>
+                  <option
+                    *ngFor="let stateDTO of listDataStatesDTOs"
+                    [ngValue]="
+                      stateDTO.id == formDataFournisseurDTO.stateDto?.id
+                        ? formDataFournisseurDTO.stateDto
+                        : stateDTO
+                    "
+                  >
+                    {{ stateDTO.name }}
+                  </option>
+                </select>
+                <span
+                  class="text-danger"
+                  *ngIf="(stateDto.touched || addFournisseurForm.submitted) && stateDto.errors?.['required']"
+                >
+                  adresse est obligatoire
+                </span>
+              </div>
+
+              <div class="form-group col-sm-6">
+                <label>Téléphone free money</label>
+                <input
+                  type="text"
+                  placeholder="76 456 12 47"
+                  class="form-control"
+                  [(ngModel)]="formDataFournisseurDTO.telephone3"
+                  name="telephone3"
+                  id="telephone3"
+                  #telephone3="ngModel"
+                />
+              </div>
+
+              <div class="form-group col-sm-6">
+                <label>Email</label>
+                <input
+                  type="email"
+                  placeholder="example@gmail.com"
+                  class="form-control"
+                  [(ngModel)]="formDataFournisseurDTO.email"
+                  name="email"
+                  id="email"
+                  #email="ngModel"
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <button
+                *ngIf="!paramId"
+                type="submit"
+                class="btn btn-success"
+                (click)="onAddFournisseur()"
+                style="cursor: pointer"
+              >
+                <i class="fa fa-database"></i> Enregistrer</button
+              >&nbsp;
+              <button
+                *ngIf="paramId"
+                class="btn btn-warning"
+                (click)="onUpdateFournisseur()"
+                style="cursor: pointer"
+              >
+                <i class="fa fa-database"></i>Modifier
+              </button>
+              <button
+                type="button"
+                class="btn btn-danger ml-1"
+                (click)="goBack()"
+                style="cursor: pointer"
+              >
+                <i class="fa fa-close"></i> Retour
+              </button>
+            </div>
+          </form>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 </div>

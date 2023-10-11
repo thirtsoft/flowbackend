@@ -11,9 +11,9 @@ export class FournisseurDto {
     lastName!: string;
     email!: string;
     telephone!: string;
+    telephone2!: string;
+    telephone3!: string;
     subject!: string;
     message!: string;
-
-    productDto!: ProductDto;
     stateDto!: StateDto; 
 }
