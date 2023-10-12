@@ -33,6 +33,7 @@ export class ListDeliveryAddressComponent implements OnInit {
     this.crudApi.getALLActivesAddressDTOs().subscribe(
       (response: AddressDto[]) => {
         this.addressDTOList = response;
+        console.log(this.addressDTOList);
       },
       (error: HttpErrorResponse) => {
         this.toastr.error("Error lors de la récupération de la liste");

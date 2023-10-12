@@ -47,9 +47,7 @@
                                 | filter: searchText
                                 | paginate: { itemsPerPage: 20, currentPage: p }
                             ">
-
-
-                            <td>{{addDTO?.sBillingAddress == 1 ? 'Adresse livraison' : 'Adresse achat'}} </td>
+                            <td>{{ addDTO?.isBillingAddress == 1 ? "addresse livraison" : "adresse achat" }}</td>
                                     <td>{{ addDTO?.rue }}</td>
                                     <td>{{ addDTO?.city }}</td>
                                     <td>{{ addDTO?.stateDto.name }}</td>
