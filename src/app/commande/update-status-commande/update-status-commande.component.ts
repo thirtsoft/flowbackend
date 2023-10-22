@@ -34,7 +34,7 @@ export class UpdateStatusCommandeComponent implements OnInit {
   infoForm() {
     this.crudApi.formData = this.fb.group({
       id: [this.crudApi.formData.value.id,  [Validators.required]],
-      status: [this.crudApi.formData.value.status, [Validators.required]],
+      /* status: [this.crudApi.formData.value.status, [Validators.required]], */
     });
   }
 
@@ -61,17 +61,48 @@ export class UpdateStatusCommandeComponent implements OnInit {
     });
   }
 
-  updateStatusAppro(){
-    this.crudApi.updateStatusOfCommandeDto(this.formData.value.id,this.formData.value).
+  payerCommande() {
+    this.crudApi.payerCommande(this.crudApi.formData.value.id).
     subscribe( data => {
-      this.toastr.warning('avec succès','status Modifié', {
+      this.toastr.warning('avec succès','Commande payée', {
         timeOut: 1500,
         positionClass: 'toast-top-right',
       });
-      this.getListCommandeDTOs();
-      this.router.navigate(['/admin/accueil/commandes']);
+      this.router.navigateByUrl("admin/accueil/commandes").then(() => {
+       this.getListCommandeDTOs();
+      });
     });
   }
+
+  rejeterCommande() {
+    this.crudApi.rejeterCommande(this.crudApi.formData.value.id).
+    subscribe( data => {
+      this.toastr.warning('avec succès','Commande rejetée', {
+        timeOut: 1500,
+        positionClass: 'toast-top-right',
+      });
+      this.router.navigateByUrl("admin/accueil/commandes").then(() => {
+       this.getListCommandeDTOs();
+      });
+    });
+  }
+
+  annulerCommande() {
+    this.crudApi.annulerCommande(this.crudApi.formData.value.id).
+    subscribe( data => {
+      this.toastr.warning('avec succès','Commande annulée', {
+        timeOut: 1500,
+        positionClass: 'toast-top-right',
+      });
+      this.router.navigateByUrl("admin/accueil/commandes").then(() => {
+       this.getListCommandeDTOs();
+      });
+    });
+  }
+
+  
+
+ 
 
 
 }

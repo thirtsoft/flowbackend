@@ -58,6 +58,24 @@ export class CommandeService {
     return this.http.patch<any>(urlUpdateStatus, {headers: headers});
   }
 
+  public payerCommande(comId: number){
+    const headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/json; charset=utf-8');
+    return this.http.patch<any>(`${this.apiServerUrl}/orders/payer-order/${comId}`, {headers: headers});
+  }
+
+  public rejeterCommande(comId: number): Observable<any> {
+    const headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/json; charset=utf-8');
+    return this.http.patch<any>(`${this.apiServerUrl}/orders/rejeter-order/${comId}`, {headers: headers});
+  }
+
+  public annulerCommande(comId: number): Observable<any> {
+    const headers = new HttpHeaders();
+    headers.set('Content-Type', 'application/json; charset=utf-8');
+    return this.http.patch<any>(`${this.apiServerUrl}/orders/annuler-order/${comId}`, {headers: headers});
+  }
+
   public getListCommandeDTOByCustomerPageable(clientId: number, page: number, size: number): Observable<CommandeDto[]> {
     const searchbyPriceUrl = (this.apiServerUrl+"/orders/search-orders-by-userId-by-pageable?clientId="+clientId+"&page="+page+"&size="+size);
     return this.http.get<CommandeDto[]>(searchbyPriceUrl);

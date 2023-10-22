@@ -28,7 +28,7 @@
               <label>Libelle</label>
               <input
                 type="text"
-                placeholder="Nom"
+                placeholder="Libelle zone"
                 class="form-control"
                 [(ngModel)]="zoneLivraison.libelle"
                 name="libelle"
@@ -43,6 +43,28 @@
                         "
               >
                 le libellé de la zone est obligatoire
+              </span>
+            </div>
+
+            <div class="form-group">
+              <label>Prix zone</label>
+              <input
+                type="text"
+                placeholder="Prix zone"
+                class="form-control"
+                [(ngModel)]="zoneLivraison.prix_zone"
+                name="prix_zone"
+                #prix_zone="ngModel"
+                required
+              />
+              <span
+                class="text-danger"
+                *ngIf="
+                          (prix_zone.touched || addZoneLivraisonForm.submitted) &&
+                          prix_zone.errors?.['required']
+                        "
+              >
+                le prix de la zone est obligatoire
               </span>
             </div>
 

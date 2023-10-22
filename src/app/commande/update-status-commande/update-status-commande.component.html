@@ -1,51 +1,72 @@
 <div class="content-wrapper">
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Modifier Status Commande</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a routerLink="/admin/accueil/dashboard">Accueil</a></li>
-                        <li class="breadcrumb-item active">Commande</li>
-                    </ol>
-                </div>
-            </div>
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Modifier Status Commande</h1>
         </div>
-    </section>
-
-    <section class="content">
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-                <div class="col-md-12">
-                    <h2>Modifier status commande</h2>
-                    <form [formGroup]="this.crudApi.formData" (ngSubmit)="onSubmit()">
-                        <div class="form-group">
-                            <label>Numero Commande </label>
-                            <input type="text" class="form-control" formControlName="id" id="id" readonly />
-                        </div>
-
-                        <div class="form-group">
-                            <label>Status</label>
-                            <select name="status" formControlName="status" id="status" class="form-control">
-                      <option value="PAYEE">PAYEE</option>
-                      <option value="ENCOURS">ENCOURS</option>
-                      <option value="REJETER">REJETER</option>
-                    </select>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-success btn-sm">
-                      <i class="fa fa-database"></i> Valider</button
-                    >&nbsp;
-                    <button type="button" class="btn btn-danger btn-sm ml-1">
-                      <i class="fa fa-close"></i> Close
-                    </button>
-                        </div>
-                    </form>
-                </div>
-
-            </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item">
+              <a routerLink="/admin/accueil/dashboard">Accueil</a>
+            </li>
+            <li class="breadcrumb-item active">Commande</li>
+          </ol>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-md-12">
+          <h2>Modifier status commande</h2>
+          <form [formGroup]="this.crudApi.formData">
+            <div class="form-group">
+              <label>Numero Commande </label>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="id"
+                id="id"
+                readonly
+              />
+            </div>
+
+           <!--  <div class="form-group">
+              <label>Status</label>
+              <select
+                name="status"
+                formControlName="status"
+                id="status"
+                class="form-control"
+              >
+                <option value="PAYEE">PAYEE</option>
+                <option value="REJETER">REJETER</option>
+                <option value="ANNULER">ANNULER</option>
+              </select>
+            </div> -->
+            <div class="form-group">
+              <button type="submit" class="btn btn-success btn-sm"
+                (click)="payerCommande()">
+                <i class="fa fa-database"></i> Payer la commande</button
+              >&nbsp;
+              <button type="submit" class="btn btn-warning btn-sm"
+                (click)="rejeterCommande()">
+                <i class="fa fa-database"></i> Rejeter la commande</button
+              >&nbsp;
+              <button type="submit" class="btn btn-info btn-sm"
+                (click)="annulerCommande()">
+                <i class="fa fa-database"></i> Annuler la commande</button
+              >&nbsp;
+              <button type="button" class="btn btn-danger btn-sm ml-1">
+                <i class="fa fa-close"></i> Fermer
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>

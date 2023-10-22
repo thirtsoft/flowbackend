@@ -152,7 +152,11 @@
                                                 item?.productId
                                                 }}" alt="{{ item.productName }}" style="width: 90px; height: 90px;"> &nbsp;
                                             <span class="text-inverse">{{ item.productName }}</span></td>
-                                        <td>{{product?.fournisseurDto?.lastName}} - {{product?.fournisseurDto?.firstName}}</td>
+                                        <td>
+                                            <span>{{product?.fournisseurDto?.lastName}} - {{product?.fournisseurDto?.firstName}}</span>
+                                            <span> Wave : {{product?.fournisseurDto?.telephone}} <br />                          
+                                                OM :{{product?.fournisseurDto?.telephone2}}</span>
+                                            </td>
                                         <td class="text-center">{{ item.quantity }}</td>
                                         <td class="text-center">{{ item.price }}</td>
                                         <td class="text-right">{{ item.price * item.quantity }}</td>

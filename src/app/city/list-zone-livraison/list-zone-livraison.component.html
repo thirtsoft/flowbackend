@@ -39,6 +39,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Libellé</th>
+                                    <th>Prix zone</th>
                                     <th class="text-right">Action</th>
                                 </tr>
                             </thead>
@@ -46,6 +47,7 @@
                                 <tr *ngFor="let zone of zoneList | filter:searchText | paginate: {itemsPerPage: 5, currentPage: p}; let i=index;">
                                     <td>{{ zone?.id }}</td>
                                     <td>{{ zone?.libelle }}</td>
+                                    <td>{{ zone.prix_zone }} </td>
                                     <td class="text-right">
                                         <button class="btn btn-primary btn-lg" [routerLink]="['/admin/accueil/localities/zone-livraison', zone.id]">
                                         <em class="fa fa-edit" aria-hidden="true"></em></button

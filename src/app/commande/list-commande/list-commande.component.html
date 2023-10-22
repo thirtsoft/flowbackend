@@ -54,7 +54,12 @@
                                         {{ comDTO?.clientDto.firstName }} {{ comDTO?.clientDto.lastName }}
                                     </td>
                                     <td>{{ comDTO?.totalCommande }}</td>
-                                    <td>{{ comDTO?.status }}</td>
+                                   <!--  <td>{{ comDTO?.status }}</td> -->
+                                    <td>{{ comDTO?.status }}
+                                        <button *ngIf="isToday" type="button" class="btn-success btn-sm pull-right" (click)="addEditStatusCommande(comDTO)" style="cursor: pointer">
+                                        <i class="fa fa-edit" aria-hidden="true"></i>
+                                      </button>
+                                    </td>
                                     <td>{{ comDTO?.dateCommande | date: "dd-MM-yyyy" }}</td>
 
                                     <td class="text-right">

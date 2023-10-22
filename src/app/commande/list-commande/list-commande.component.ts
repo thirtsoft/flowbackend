@@ -18,6 +18,8 @@ export class ListCommandeComponent implements OnInit {
   id!: number;
   p: number=1;
   searchText: any;
+  isToday: boolean = false;
+  today = new Date();
 
   constructor(public crudApi: CommandeService,
               public router: Router,
@@ -33,6 +35,11 @@ export class ListCommandeComponent implements OnInit {
     this.crudApi.getALLActivesCommandeDTOs().subscribe(
       (response: CommandeDto[]) => {
         this.commandeDTOList = response;
+        for(let i = 0; this.commandeDTOList.length; i++) {
+          if (this.commandeDTOList[i].dateCommande === this.today) {
+            this.isToday = true;
+          }
+        }
       },
       (error: HttpErrorResponse) => {
         this.toastr.error("Erreur lors de la récupération de la liste");
@@ -42,6 +49,12 @@ export class ListCommandeComponent implements OnInit {
 
   viewCommande(item: CommandeDto) {
     this.router.navigateByUrl('admin/accueil/commandes/view-Commande/' + item.id);
+  }
+
+  addEditStatusCommande(item : CommandeDto) {
+    this.crudApi.choixmenu == 'M';
+    this.crudApi.formData = this.fb.group(Object.assign({},item));
+    this.router.navigate(['/admin/accueil/commandes/update-status', this.crudApi.formData]);
   }
 
   onDeleteCommande(id: number): void{
